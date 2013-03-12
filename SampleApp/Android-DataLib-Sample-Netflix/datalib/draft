@@ -1,0 +1,95 @@
+
+http://api-public.netflix.com/
+	catalog/ (collection only)
+		people/person_id
+http://api-public.netflix.com/catalog/people/person_id
+			filmography
+		titles
+			streaming
+			dvd
+			autocomplete
+http://api-public.netflix.com/catalog/titles/movies/title_id
+http://api-public.netflix.com/catalog/titles/series/series_id
+http://api-public.netflix.com/catalog/titles/series/series_id/seasons/season_id
+http://api-public.netflix.com/catalog/titles/programs/program_id
+http://api-public.netflix.com/catalog/titles/type/title_id/similars
+			[movies|series|series/series_ID/seasons|programs|discs]/title_ID/
+				synopsis
+				format_availability
+				bonus_materials
+				awards
+				cast
+				directors
+				screen_formats
+				episodes (series and seasons only)
+				seasons (series only)
+				similars
+				languages_and_audio
+				synopsis
+	users/current
+	users/user_id
+		feeds
+		queues/ (collection only)
+			instant (feed available)
+				saved (feed available)
+				available (feed available)
+		title_states
+		recommendations (feed available)
+		ratings/ (collection only)
+			title
+				actual (feed available)
+				predicted (feed available)
+		lists
+		
+		
+		
+http://api-public.netflix.com/catalog/titles/index
+<?xml version="1.0" standalone='yes'?>
+<catalog_titles>
+  <link href="http://api-public.netflix.com/catalog/titles/index" rel="http://schemas.netflix.com/catalog/titles/index" title="index"></link>
+  <link href="http://api-public.netflix.com/catalog/titles/autocomplete" rel="http://schemas.netflix.com/catalog/titles/autocomplete" title="autocomplete"></link>
+  <url_template>http://api-public.netflix.com/catalog/titles?{-join|&amp;|term|start_index|max_results}</url_template>
+  <number_of_results>1651</number_of_results>
+  <start_index>10</start_index>
+  <results_per_page>2</results_per_page>
+  <catalog_title>
+    <id>http://api-public.netflix.com/catalog/titles/movies/70025188</id><title short="Chris LeDoux: Video Hits" regular="Chris LeDoux: Video Hits"></title>
+<box_art small="http://cdn-8.nflximg.com/us/boxshots/tiny/70025188.jpg" medium="http://cdn-8.nflximg.com/us/boxshots/small/70025188.jpg" large="http://cdn-8.nflximg.com/us/boxshots/large/70025188.jpg"></box_art>
+<link href="http://api-public.netflix.com/catalog/titles/movies/70025188/synopsis" rel="http://schemas.netflix.com/catalog/titles/synopsis" title="synopsis"></link>
+<release_year>1993</release_year>
+<category scheme="http://api-public.netflix.com/categories/mpaa_ratings" label="NR" term="NR"></category>
+<category scheme="http://api-public.netflix.com/categories/genres" label="Music &amp; Musicals" term="Music &amp; Musicals"></category>
+<category scheme="http://api-public.netflix.com/categories/genres" label="Classic Country &amp; Western" term="Classic Country &amp; Western"></category>
+<category scheme="http://api-public.netflix.com/categories/genres" label="Country &amp; Western/Folk" term="Country &amp; Western/Folk"></category>
+<runtime>3360</runtime>
+<link href="http://api-public.netflix.com/catalog/titles/movies/70025188/cast" rel="http://schemas.netflix.com/catalog/people.cast" title="cast"></link>
+<link href="http://api-public.netflix.com/catalog/titles/movies/70025188/format_availability" rel="http://schemas.netflix.com/catalog/titles/format_availability" title="formats"></link>
+<link href="http://api-public.netflix.com/catalog/titles/movies/70025188/screen_formats" rel="http://schemas.netflix.com/catalog/titles/screen_formats" title="screen formats"></link>
+<link href="http://api-public.netflix.com/catalog/titles/movies/70025188/languages_and_audio" rel="http://schemas.netflix.com/catalog/titles/languages_and_audio" title="languages and audio"></link>
+<average_rating>3.0</average_rating>
+<link href="http://api-public.netflix.com/catalog/titles/movies/70025188/similars" rel="http://schemas.netflix.com/catalog/titles.similars" title="similars"></link>
+<link href="http://www.netflix.com/Movie/Chris_LeDoux_Video_Hits/70025188" rel="alternate" title="web page"></link>
+
+  </catalog_title>
+  <catalog_title>
+    <id>http://api-public.netflix.com/catalog/titles/movies/70048982</id><title short="Best of Chris Isaak" regular="Best of Chris Isaak"></title>
+<box_art small="http://cdn-2.nflximg.com/us/boxshots/tiny/70048982.jpg" medium="http://cdn-2.nflximg.com/us/boxshots/small/70048982.jpg" large="http://cdn-2.nflximg.com/us/boxshots/large/70048982.jpg"></box_art>
+<link href="http://api-public.netflix.com/catalog/titles/movies/70048982/synopsis" rel="http://schemas.netflix.com/catalog/titles/synopsis" title="synopsis"></link>
+<release_year>2006</release_year>
+<category scheme="http://api-public.netflix.com/categories/mpaa_ratings" label="NR" term="NR"></category>
+<category scheme="http://api-public.netflix.com/categories/genres" label="Music &amp; Musicals" term="Music &amp; Musicals"></category>
+<category scheme="http://api-public.netflix.com/categories/genres" label="Rock &amp; Pop" term="Rock &amp; Pop"></category>
+<category scheme="http://api-public.netflix.com/categories/genres" label="Singer-Songwriters" term="Singer-Songwriters"></category>
+<runtime>3600</runtime>
+<link href="http://api-public.netflix.com/catalog/titles/movies/70048982/cast" rel="http://schemas.netflix.com/catalog/people.cast" title="cast"></link>
+<link href="http://api-public.netflix.com/catalog/titles/movies/70048982/format_availability" rel="http://schemas.netflix.com/catalog/titles/format_availability" title="formats"></link>
+<link href="http://api-public.netflix.com/catalog/titles/movies/70048982/screen_formats" rel="http://schemas.netflix.com/catalog/titles/screen_formats" title="screen formats"></link>
+<link href="http://api-public.netflix.com/catalog/titles/movies/70048982/languages_and_audio" rel="http://schemas.netflix.com/catalog/titles/languages_and_audio" title="languages and audio"></link>
+<average_rating>3.3</average_rating>
+<link href="http://api-public.netflix.com/catalog/titles/movies/70048982/similars" rel="http://schemas.netflix.com/catalog/titles.similars" title="similars"></link>
+<link href="http://www.netflix.com/Movie/Best_of_Chris_Isaak/70048982" rel="alternate" title="web page"></link>
+
+  </catalog_title>
+</catalog_titles>
+
+

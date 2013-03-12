@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="GridLayout">
+        <attr name="columns" format="integer" />
+        <attr name="rows" format="integer" />
+        <attr name="preferredCellWidth" format="integer" />
+        <attr name="preferredCellHeight" format="integer" />
+        <attr name="columnMargin" format="dimension" />
+        <attr name="rowMargin" format="dimension" />
+    </declare-styleable>
+    
+    <declare-styleable name="GridLayout_Layout">
+		<attr name="layout_column" format="integer" />
+		<attr name="layout_columnSpan" format="integer" />
+		<attr name="layout_row" format="integer" />
+		<attr name="layout_rowSpan" format="integer" />
+	</declare-styleable>
+</resources>

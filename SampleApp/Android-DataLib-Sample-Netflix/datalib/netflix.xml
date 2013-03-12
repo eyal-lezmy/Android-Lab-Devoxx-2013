@@ -1,0 +1,415 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<datalib:project 
+	xmlns:datalib="http://eyal.fr/"
+    datalib:name="Netflix" 
+    datalib:package="fr.eyal.datalib.sample.netflix.data" 
+    datalib:authority="fr.eyal.datalib.sample.netflix.datacache.provider"
+    datalib:databaseName="datalib_cache"
+    datalib:databaseVersion="5">
+    
+
+        <!-- NEW RELEASES -->
+	<datalib:webservice
+		datalib:httpMethod="GET"
+		datalib:parseType="SAX"
+		datalib:name="NewReleases"
+		datalib:url="http://dvd.netflix.com/NewReleasesRSS">
+		<!-- Configuration of the web service -->
+		<datalib:config>
+			<datalib:httpMethod>GET</datalib:httpMethod>
+			<datalib:parseType>SAX</datalib:parseType>
+			<datalib:options>
+			    <!-- No option -->
+			</datalib:options>
+			<datalib:parameters>
+			    <!-- No parameter -->
+			</datalib:parameters>
+		</datalib:config>
+		<!-- Content definition of the web service -->
+<rss version="2.0">
+  <channel>
+    <title>string</title>
+    <ttl>int</ttl>
+    <link>string</link>
+    <description>string</description>
+    <language>string</language>
+    <item datalib:multiple="true" datalib:name="ItemNewRelease">
+      <title>Dredd</title>
+      <link>string</link>
+      <description>string</description>
+    </item>
+  </channel>
+</rss>
+	</datalib:webservice>
+
+	<!-- MOVIE IMAGE -->
+	<datalib:webservice
+		datalib:httpMethod="GET"
+		datalib:parseType="IMAGE"
+		datalib:name="MovieImage"
+		datalib:url="{0}">
+		<!-- Configuration of the web service -->
+		<datalib:config>
+			<datalib:httpMethod>GET</datalib:httpMethod>
+			<datalib:parseType>IMAGE</datalib:parseType>
+			<datalib:options>
+			    <!-- No option -->
+			</datalib:options>
+			<datalib:parameters>
+			    <url datalib:type="string" datalib:urlParameter="0" datalib:description="Image's URL"/>
+			</datalib:parameters>
+		</datalib:config>
+		<!-- Content definition of the web service -->
+	</datalib:webservice>
+	
+	
+	<!-- TOP 100 -->
+	<datalib:webservice
+		datalib:httpMethod="GET"
+		datalib:parseType="SAX"
+		datalib:name="Top100"
+		datalib:url="http://dvd.netflix.com/Top100RSS">
+		<!-- Configuration of the web service -->
+		<datalib:config>
+			<datalib:httpMethod>GET</datalib:httpMethod>
+			<datalib:parseType>SAX</datalib:parseType>
+			<datalib:options>
+			    <!-- No option -->
+			</datalib:options>
+			<datalib:parameters>
+			    <!-- No parameter -->
+			</datalib:parameters>
+		</datalib:config>
+		<!-- Content definition of the web service -->
+<rss version="2.0">
+  <channel>
+    <title>string</title>
+    <ttl>int</ttl>
+    <link>string</link>
+    <description>string</description>
+    <language>string</language>
+    <item datalib:multiple="true" datalib:name="ItemTop100">
+      <title>Dredd</title>
+      <link>string</link>
+      <description>string</description>
+    </item>
+  </channel>
+</rss>
+	</datalib:webservice>
+
+	
+		<!-- TOP GENRE -->
+	<datalib:webservice
+		datalib:httpMethod="GET"
+		datalib:parseType="SAX"
+		datalib:name="TopGenre"
+		datalib:url="http://dvd.netflix.com/Top25RSS">
+		<!-- Configuration of the web service -->
+		<datalib:config>
+			<datalib:httpMethod>GET</datalib:httpMethod>
+			<datalib:parseType>SAX</datalib:parseType>
+			<datalib:options>
+			    <!-- No option -->
+			</datalib:options>
+			<datalib:parameters>
+			    <gid datalib:type="int" datalib:description="The Genre's ID you are looking for"/>
+			</datalib:parameters>
+		</datalib:config>
+		<!-- Content definition of the web service -->
+<rss version="2.0">
+  <channel>
+    <title>string</title>
+    <ttl>int</ttl>
+    <link>string</link>
+    <description>string</description>
+    <language>string</language>
+    <item datalib:multiple="true" datalib:name="ItemTopGenre">
+      <title>Dredd</title>
+      <link>string</link>
+      <description>string</description>
+    </item>
+  </channel>
+</rss>
+	</datalib:webservice>
+		
+
+    <!-- AUTOCOMPLETE -->
+	<datalib:webservice
+		datalib:httpMethod="GET"
+		datalib:parseType="SAX"
+		datalib:name="Autocomplete"
+		datalib:url="http://api-public.netflix.com/catalog/titles/autocomplete">
+		<!-- Configuration of the web service -->
+		<datalib:config>
+			<datalib:httpMethod>GET</datalib:httpMethod>
+			<datalib:parseType>SAX</datalib:parseType>
+			<datalib:options>
+ 				<datalib:OPTION_DATABASE_CACHE_DISABLED />
+			</datalib:options>
+			<datalib:parameters>
+				<oauth_consumer_key datalib:type="string" datalib:description="The OAuth consumer key of the developer"/>
+				<term datalib:type="string" datalib:description="The term of the content you are looking for"/>
+			</datalib:parameters>
+		</datalib:config>
+		<!-- Content definition of the web service -->
+<h1 datalib:name="error">string</h1>
+<autocomplete>
+  <autocomplete_item datalib:multiple="true">
+    <title short="string"></title>
+  </autocomplete_item>
+</autocomplete>
+	</datalib:webservice>
+	
+	
+    <!-- SEARCH TITLES -->
+	<datalib:webservice
+		datalib:httpMethod="GET"
+		datalib:parseType="SAX"
+		datalib:name="CatalogTitles"
+		datalib:url="http://api-public.netflix.com/catalog/titles">
+		<!-- Configuration of the web service -->
+		<datalib:config>
+			<datalib:httpMethod>GET</datalib:httpMethod>
+			<datalib:parseType>SAX</datalib:parseType>
+			<datalib:options>
+ 				<datalib:OPTION_DATABASE_CACHE_DISABLED />
+			</datalib:options>
+			<datalib:parameters>
+ 				<max_results datalib:type="int" datalib:description="Maximum number of results expected. If this parameter is not present, the default value is 25."/>
+				<oauth_consumer_key datalib:type="string" datalib:description="The OAuth consumer key of the developer"/>
+ 				<oauth_nonce datalib:type="string" datalib:description="A random string"/>
+				<oauth_signature_method datalib:type="string" datalib:description="The OAuth signature method. Here we use HMAC-SHA1"/>
+				<oauth_timestamp datalib:type="int" datalib:description="The current timestamp"/>
+				<start_index datalib:type="int" datalib:description="Start index of the result (to paginate the results). This value is linked to max_result"/>
+				<term datalib:type="string" datalib:description="The term of the content you are looking for"/>
+				<oauth_signature datalib:type="string" datalib:description="The request's signature computed thanks to the specific OAuth process"/>
+			</datalib:parameters>
+		</datalib:config>
+		<!-- Content definition of the web service -->
+<h1 datalib:name="error">string</h1>
+<catalog_titles>
+  <number_of_results>int</number_of_results>
+  <start_index>int</start_index>
+  <results_per_page>int</results_per_page>
+  <catalog_title datalib:multiple="true" datalib:name="CatalogTitle">
+    <id>string</id>
+    <title short="string" regular="string" />
+	<box_art small="string" medium="string" large="string" />
+	<release_year>int</release_year>
+  	<category datalib:name="CatalogTitleCategory" datalib:multiple="true" label="string" term="string"></category>
+	<link datalib:name="CatalogTitleLink" datalib:multiple="true" href="string" rel="string" title="string"></link>
+	<!-- Idee de formatage d'une selection avec condition. Ici on test si l'attribut title est egal a synopsis
+	<link datalib:condition="attr.title == synopsis" datalib:name="synopsis" href="string" rel="string" title="string"></link>
+	-->
+	<runtime>int</runtime>
+	<average_rating>float</average_rating>
+  </catalog_title>
+</catalog_titles>
+	</datalib:webservice>
+	
+	
+	<!-- PEOPLE -->
+	<datalib:webservice
+		datalib:httpMethod="GET"
+		datalib:parseType="SAX"
+		datalib:name="People"
+		datalib:url="http://api-public.netflix.com/catalog/people/{0}">
+		<!-- Configuration of the web service -->
+		<datalib:config>
+			<datalib:httpMethod>GET</datalib:httpMethod>
+			<datalib:parseType>SAX</datalib:parseType>
+			<datalib:options>
+<!-- 				<datalib:OPTION_DATABASE_CACHE_DISABLED /> -->
+			</datalib:options>
+			<datalib:parameters>
+ 				<person_id datalib:type="int" datalib:urlParameter="0" datalib:description="Person's ID"/>
+ 				<oauth_consumer_key datalib:type="string" datalib:description="The OAuth consumer key of the developer"/>
+ 				<oauth_nonce datalib:type="string" datalib:description="A random string"/>
+				<oauth_signature_method datalib:type="string" datalib:description="The OAuth signature method. Here we use HMAC-SHA1"/>
+				<oauth_timestamp datalib:type="int" datalib:description="The current timestamp"/>
+				<oauth_signature datalib:type="string" datalib:description="The request's signature computed thanks to the specific OAuth process"/>
+			</datalib:parameters>
+		</datalib:config>
+		<!-- Content definition of the web service -->
+<h1 datalib:name="error">string</h1>
+<person>
+  <id>string</id>
+  <name>string</name>
+  <link datalib:name="PeopleLink" datalib:multiple="true" href="string" rel="string" title="string"></link>
+</person>
+	</datalib:webservice>
+	
+	
+	<!-- FILMOGRAPHY -->
+	<datalib:webservice
+		datalib:httpMethod="GET"
+		datalib:parseType="SAX"
+		datalib:name="Filmography"
+		datalib:url="http://api-public.netflix.com/catalog/people/{0}/filmography">
+		<!-- Configuration of the web service -->
+		<datalib:config>
+			<datalib:httpMethod>GET</datalib:httpMethod>
+			<datalib:parseType>SAX</datalib:parseType>
+			<datalib:options>
+<!-- 				<datalib:OPTION_DATABASE_CACHE_DISABLED /> -->
+			</datalib:options>
+			<datalib:parameters>
+ 				<person_id datalib:type="int" datalib:urlParameter="0" datalib:description="Person's ID"/>
+ 				<oauth_consumer_key datalib:type="string" datalib:description="The OAuth consumer key of the developer"/>
+ 				<oauth_nonce datalib:type="string" datalib:description="A random string"/>
+				<oauth_signature_method datalib:type="string" datalib:description="The OAuth signature method. Here we use HMAC-SHA1"/>
+				<oauth_timestamp datalib:type="int" datalib:description="The current timestamp"/>
+				<oauth_signature datalib:type="string" datalib:description="The request's signature computed thanks to the specific OAuth process"/>
+			</datalib:parameters>
+		</datalib:config>
+		<!-- Content definition of the web service -->
+<h1 datalib:name="error">string</h1>
+<filmography>
+  <filmography_item datalib:multiple="true">
+    <id>string</id>
+    <title short="string" regular="string"></title>
+	<box_art small="string" medium="string" large="string"></box_art>
+	<link datalib:name="FilmographyLink" datalib:multiple="true" href="string" rel="string" title="string"></link>
+	<release_year>int</release_year>
+	<category datalib:name="FilmographyCategory" datalib:multiple="true" scheme="string" label="string" term="string"></category>
+	<runtime>int</runtime>
+	<average_rating>float</average_rating>
+  </filmography_item>
+</filmography>
+	</datalib:webservice>
+
+	
+	<!-- MOVIES -->
+	<datalib:webservice
+		datalib:httpMethod="GET"
+		datalib:parseType="SAX"
+		datalib:name="Movie"
+		datalib:url="http://api-public.netflix.com/catalog/titles/movies/{0}">
+		<!-- Configuration of the web service -->
+		<datalib:config>
+			<datalib:httpMethod>GET</datalib:httpMethod>
+			<datalib:parseType>SAX</datalib:parseType>
+			<datalib:options>
+<!-- 				<datalib:OPTION_DATABASE_CACHE_DISABLED /> -->
+			</datalib:options>
+			<datalib:parameters>
+ 				<movie_id datalib:type="int" datalib:urlParameter="0" datalib:description="Movie's ID"/>
+ 				<oauth_consumer_key datalib:type="string" datalib:description="The OAuth consumer key of the developer"/>
+ 				<oauth_nonce datalib:type="string" datalib:description="A random string"/>
+				<oauth_signature_method datalib:type="string" datalib:description="The OAuth signature method. Here we use HMAC-SHA1"/>
+				<oauth_timestamp datalib:type="int" datalib:description="The current timestamp"/>
+				<oauth_signature datalib:type="string" datalib:description="The request's signature computed thanks to the specific OAuth process"/>
+			</datalib:parameters>
+		</datalib:config>
+		<!-- Content definition of the web service -->
+<h1 datalib:name="error">string</h1>
+<catalog_title>
+  <id>string</id>
+  <title short="string" regular="string" />
+  <box_art small="string" medium="string" large="string" />
+  <link datalib:name="MovieLink" datalib:multiple="true" href="string" rel="string" title="string"></link>
+  <release_year>int</release_year>
+  <category datalib:name="MovieCategory" datalib:multiple="true" scheme="string" label="string" term="string"></category>
+  <runtime>int</runtime>
+  <average_rating>float</average_rating>
+</catalog_title>
+	</datalib:webservice>
+	
+
+	<!-- SYNOPSIS -->
+	<datalib:webservice
+		datalib:httpMethod="GET"
+		datalib:parseType="SAX"
+		datalib:name="Synopsis"
+		datalib:url="http://api-public.netflix.com/catalog/titles/movies/{0}/synopsis">
+		<!-- Configuration of the web service -->
+		<datalib:config>
+			<datalib:httpMethod>GET</datalib:httpMethod>
+			<datalib:parseType>SAX</datalib:parseType>
+			<datalib:options>
+<!-- 				<datalib:OPTION_DATABASE_CACHE_DISABLED /> -->
+			</datalib:options>
+			<datalib:parameters>
+ 				<movie_id datalib:type="int" datalib:urlParameter="0" datalib:description="Movie's ID"/>
+ 				<oauth_consumer_key datalib:type="string" datalib:description="The OAuth consumer key of the developer"/>
+ 				<oauth_nonce datalib:type="string" datalib:description="A random string"/>
+				<oauth_signature_method datalib:type="string" datalib:description="The OAuth signature method. Here we use HMAC-SHA1"/>
+				<oauth_timestamp datalib:type="int" datalib:description="The current timestamp"/>
+				<oauth_signature datalib:type="string" datalib:description="The request's signature computed thanks to the specific OAuth process"/>
+			</datalib:parameters>
+		</datalib:config>
+		<!-- Content definition of the web service -->
+<h1 datalib:name="error">string</h1>
+<synopsis>string</synopsis>
+	</datalib:webservice>
+	
+
+	<!-- CAST -->
+	<datalib:webservice
+		datalib:httpMethod="GET"
+		datalib:parseType="SAX"
+		datalib:name="Cast"
+		datalib:url="http://api-public.netflix.com/catalog/titles/movies/{0}/cast">
+		<!-- Configuration of the web service -->
+		<datalib:config>
+			<datalib:httpMethod>GET</datalib:httpMethod>
+			<datalib:parseType>SAX</datalib:parseType>
+			<datalib:options>
+<!-- 				<datalib:OPTION_DATABASE_CACHE_DISABLED /> -->
+			</datalib:options>
+			<datalib:parameters>
+ 				<movie_id datalib:type="int" datalib:urlParameter="0" datalib:description="Movie's ID"/>
+ 				<oauth_consumer_key datalib:type="string" datalib:description="The OAuth consumer key of the developer"/>
+ 				<oauth_nonce datalib:type="string" datalib:description="A random string"/>
+				<oauth_signature_method datalib:type="string" datalib:description="The OAuth signature method. Here we use HMAC-SHA1"/>
+				<oauth_timestamp datalib:type="int" datalib:description="The current timestamp"/>
+				<oauth_signature datalib:type="string" datalib:description="The request's signature computed thanks to the specific OAuth process"/>
+			</datalib:parameters>
+		</datalib:config>
+		<!-- Content definition of the web service -->
+<h1 datalib:name="error">string</h1>
+<people>
+  <person datalib:name="CastPerson" datalib:multiple="true">
+    <id>string</id>
+    <name>string</name>
+    <bio>string</bio>
+    <link datalib:name="CastLink" datalib:multiple="true" href="string" rel="string" title="string"></link>
+  </person>
+</people>
+	</datalib:webservice>
+
+	<!-- DIRECTORS -->
+	<datalib:webservice
+		datalib:httpMethod="GET"
+		datalib:parseType="SAX"
+		datalib:name="Directors"
+		datalib:url="http://api-public.netflix.com/catalog/titles/movies/{0}/directors">
+		<!-- Configuration of the web service -->
+		<datalib:config>
+			<datalib:httpMethod>GET</datalib:httpMethod>
+			<datalib:parseType>SAX</datalib:parseType>
+			<datalib:options>
+<!-- 				<datalib:OPTION_DATABASE_CACHE_DISABLED /> -->
+			</datalib:options>
+			<datalib:parameters>
+ 				<movie_id datalib:type="int" datalib:urlParameter="0" datalib:description="Movie's ID"/>
+ 				<oauth_consumer_key datalib:type="string" datalib:description="The OAuth consumer key of the developer"/>
+ 				<oauth_nonce datalib:type="string" datalib:description="A random string"/>
+				<oauth_signature_method datalib:type="string" datalib:description="The OAuth signature method. Here we use HMAC-SHA1"/>
+				<oauth_timestamp datalib:type="int" datalib:description="The current timestamp"/>
+				<oauth_signature datalib:type="string" datalib:description="The request's signature computed thanks to the specific OAuth process"/>
+			</datalib:parameters>
+		</datalib:config>
+		<!-- Content definition of the web service -->
+<h1 datalib:name="error">string</h1>
+<people>
+  <person datalib:name="Director"  datalib:multiple="true">
+    <id>string</id>
+    <name>string</name>
+    <bio>string</bio>
+    <link datalib:name="DirectorLink"  datalib:multiple="true" href="string" rel="string" title="string"></link>
+  </person>
+</people>
+	</datalib:webservice>
+	
+</datalib:project>

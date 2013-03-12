@@ -1,0 +1,131 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <com.viewpagerindicator.TitlePageIndicator
+        android:id="@+id/indicator"
+        android:padding="10dip"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_alignParentTop="true"
+        android:background="@color/vpi__background_holo_light"
+        android:textColor="@color/netflix_red"
+        app:footerColor="@color/netflix_red"
+        app:selectedColor="@color/netflix_red"
+        app:footerLineHeight="1dp"
+        app:footerIndicatorHeight="3dp"
+        app:footerIndicatorStyle="underline"
+        app:selectedBold="true"
+        />
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_below="@id/indicator"
+        android:layout_alignParentBottom="true"
+        />
+
+</RelativeLayout>
+
+
+<!-- <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+    android:name="fr.eyal.datalib.sample.netflix.fragment.SelectionFragment"
+    android:id="@+id/list"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" />
+ -->
+<!-- <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scroll"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+ 
+ 	<RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".NetflixActivity" >
+
+        <Button
+            android:id="@+id/newReleases"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/searchTitle"
+            android:text="New Releases" />
+
+        <Button
+            android:id="@+id/autocomplete"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/newReleases"
+            android:text="Autocomplete 'chr'" />
+        
+        <Button
+            android:id="@+id/top100"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/autocomplete"
+            android:text="Top 100" />
+<
+        <Button
+            android:id="@+id/topGenre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/top100"
+            android:text="Top Genre" />
+
+        <Button
+            android:id="@+id/getPeople"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/topGenre"
+            android:text="getPeople" />
+
+        <Button
+            android:id="@+id/getFilmography"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/getPeople"
+            android:text="getFilmography" />
+
+        <Button
+            android:id="@+id/getSynopsis"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/getFilmography"
+            android:text="getSynopsis" />
+
+        <Button
+            android:id="@+id/getMovie"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/getSynopsis"
+            android:text="getMovie" />
+
+        <Button
+            android:id="@+id/getDirectors"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/getMovie"
+            android:text="getDirectors" />
+
+        <Button
+            android:id="@+id/getCast"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/getDirectors"
+            android:text="getCast" />
+
+        <Button
+            android:id="@+id/searchTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:text="Search title 'chris'" />
+
+    </RelativeLayout>
+
+</ScrollView> -->
