@@ -5,12 +5,14 @@ import java.io.File;
 import java.lang.ref.SoftReference;
 
 import fr.eyal.datalib.sample.netflix.data.model.movieimage.MovieImage;
-import fr.eyal.datalib.sample.netflix.fragment.MovieItem;
+import fr.eyal.datalib.sample.netflix.data.model.top100.ItemTop100;
+import fr.eyal.datalib.sample.netflix.fragment.model.MovieItem;
 import fr.eyal.lib.util.FileManager;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Parcel;
+import android.os.Parcelable;
 
 public class ItemNewRelease extends ItemNewReleaseBase implements MovieItem{
 
@@ -35,10 +37,6 @@ public class ItemNewRelease extends ItemNewReleaseBase implements MovieItem{
     
     public ItemNewRelease() {
         super();
-    }
-
-    public ItemNewRelease(final Parcel in) {
-        super(in);
     }
 
     public ItemNewRelease(final long id) {
@@ -114,6 +112,57 @@ public class ItemNewRelease extends ItemNewReleaseBase implements MovieItem{
 	public MovieImage getImage() {
 		return image;
 	}
+	
+    /**
+     * PARCELABLE MANAGMENT
+     */
+
+	public static final Parcelable.Creator<ItemNewRelease> CREATOR = new Parcelable.Creator<ItemNewRelease>() {
+	    @Override
+	    public ItemNewRelease createFromParcel(final Parcel in) {
+	        return new ItemNewRelease(in);
+	    }
+	
+	    @Override
+	    public ItemNewRelease[] newArray(final int size) {
+	        return new ItemNewRelease[size];
+	    }
+	};
+
+	@Override
+	public int describeContents() {
+	    return 0;
+	}
+
+	@Override
+	public void writeToParcel(final Parcel dest, final int flags) {
+		super.writeToParcel(dest, flags);
+
+		dest.writeParcelable(image, 0);
+		dest.writeString(imageUrl);
+		dest.writeString(imageName);		
+	}
+
+	public ItemNewRelease(final Parcel in) {
+		super(in);
+		
+		image = in.readParcelable(MovieImage.class.getClassLoader());
+		imageUrl = in.readString();
+		imageName = in.readString();
+		
+	}
+
+	@Override
+	public String getId() {
+		
+		String[] elements = link.split("/");
+		
+		if(elements != null && elements.length > 0)
+			return elements[elements.length-1]; //we return the last element on the link
+		
+		return null;
+	}    
+
 
 
 }

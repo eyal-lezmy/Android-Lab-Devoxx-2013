@@ -4,7 +4,7 @@ package fr.eyal.datalib.sample.netflix.data.model.newreleases;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-import fr.eyal.datalib.sample.netflix.fragment.MovieItemResponse;
+import fr.eyal.datalib.sample.netflix.fragment.model.MovieItemResponse;
 import android.os.Parcel;
 
 public class NewReleases extends NewReleasesBase implements MovieItemResponse{

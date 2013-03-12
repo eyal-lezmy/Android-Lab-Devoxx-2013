@@ -1,4 +1,4 @@
-package fr.eyal.datalib.sample.netflix.fragment;
+package fr.eyal.datalib.sample.netflix.fragment.model;
 
 import java.util.ArrayList;
 import java.util.Calendar;

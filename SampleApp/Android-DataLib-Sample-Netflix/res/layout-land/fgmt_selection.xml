@@ -1,0 +1,937 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/fr.eyal.datalib.sample.netflix"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="vertical" >
+
+    <fr.eyal.datalib.sample.netflix.ui.GridLayout
+        android:id="@+id/selectionLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        app:columns="3"
+        app:rows="8"
+		app:columnMargin="@dimen/item_margin_column"
+		app:rowMargin="@dimen/item_margin_row"
+        app:preferredCellHeight="@dimen/item_height_small">
+        
+        
+        <RelativeLayout
+            android:id="@+id/item1"
+            app:layout_column="0"
+            app:layout_columnSpan="2"
+            app:layout_row="0"
+            app:layout_rowSpan="2"
+            android:layout_marginBottom="4dp"
+            android:background="@drawable/item_small_bg"
+            android:paddingBottom="1dp"
+            android:paddingLeft="0dp"
+            android:paddingRight="0dp"
+            android:paddingTop="1dp" >
+
+            <ImageView
+                android:id="@+id/item1_image"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:adjustViewBounds="true"
+                android:background="@color/padding_grey"
+                android:paddingRight="@dimen/image_border_big"
+                android:src="@drawable/movie_back" />
+
+            <fr.eyal.datalib.sample.netflix.ui.LightTextViewUnderlined
+                android:id="@+id/item1_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginBottom="16dp"
+                android:layout_marginLeft="26dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_toRightOf="@+id/item1_image"
+                android:gravity="right"
+                android:paddingBottom="2dp"
+                android:text=""
+                android:textColor="@color/netflix_red"
+                android:textSize="@dimen/item_font_size" />
+
+        </RelativeLayout>
+        
+        <RelativeLayout
+            android:id="@+id/item1"
+            app:layout_column="2"
+            app:layout_columnSpan="1"
+            app:layout_row="0"
+            app:layout_rowSpan="1"
+            android:layout_marginBottom="4dp"
+            android:background="@drawable/item_small_bg"
+            android:paddingBottom="1dp"
+            android:paddingLeft="0dp"
+            android:paddingRight="0dp"
+            android:paddingTop="1dp" >
+
+            <ImageView
+                android:id="@+id/item1_image"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:adjustViewBounds="true"
+                android:background="@color/padding_grey"
+                android:paddingRight="@dimen/image_border_big"
+                android:src="@drawable/movie_back" />
+
+            <fr.eyal.datalib.sample.netflix.ui.LightTextView
+                android:id="@+id/item1_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginBottom="16dp"
+                android:layout_marginLeft="26dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_toRightOf="@+id/item1_image"
+                android:gravity="right"
+                android:paddingBottom="2dp"
+                android:text=""
+                android:textColor="@color/netflix_red"
+                android:textSize="@dimen/item_font_size_small" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/item1"
+            app:layout_column="2"
+            app:layout_columnSpan="1"
+            app:layout_row="1"
+            app:layout_rowSpan="1"
+            android:layout_marginBottom="4dp"
+            android:background="@drawable/item_small_bg"
+            android:paddingBottom="1dp"
+            android:paddingLeft="0dp"
+            android:paddingRight="0dp"
+            android:paddingTop="1dp" >
+
+            <ImageView
+                android:id="@+id/item1_image"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:adjustViewBounds="true"
+                android:background="@color/padding_grey"
+                android:paddingRight="@dimen/image_border_big"
+                android:src="@drawable/movie_back" />
+
+            <fr.eyal.datalib.sample.netflix.ui.LightTextView
+                android:id="@+id/item1_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginBottom="16dp"
+                android:layout_marginLeft="26dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_toRightOf="@+id/item1_image"
+                android:gravity="right"
+                android:paddingBottom="2dp"
+                android:text=""
+                android:textColor="@color/netflix_red"
+                android:textSize="@dimen/item_font_size_small" />
+
+        </RelativeLayout>
+        
+        
+        
+        <ImageView
+            android:id="@+id/item2"
+            app:layout_column="0"
+            app:layout_row="2"
+            android:layout_marginBottom="2dp"
+            android:layout_marginRight="2dp"
+            android:background="@drawable/netflix_logo_bg"
+            android:src="@drawable/netflix_logo"
+            android:paddingBottom="2dp"
+            android:paddingLeft="0dp"
+            android:paddingRight="0dp"
+            android:paddingTop="1dp"
+            android:scaleType="fitXY"
+            android:adjustViewBounds="true"/>
+        
+        <RelativeLayout
+            android:id="@+id/item3"
+            app:layout_column="1"
+            app:layout_row="2"
+            android:layout_marginBottom="2dp"
+            android:layout_marginLeft="2dp"
+            android:background="@drawable/item_small_bg"
+            android:paddingBottom="1dp"
+            android:paddingLeft="0dp"
+            android:paddingRight="0dp"
+            android:paddingTop="1dp" >
+
+            <ImageView
+                android:id="@+id/item3_image"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:adjustViewBounds="true"
+                android:background="@color/padding_grey"
+                android:paddingLeft="0dp"
+                android:paddingRight="@dimen/image_border_small"
+                android:scaleType="fitStart"
+                android:src="@drawable/movie_back" />
+
+            <fr.eyal.datalib.sample.netflix.ui.LightTextView
+                android:id="@+id/item3_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="@dimen/item_text_margin_vert"
+        		android:layout_marginLeft="@dimen/item_text_margin_hor"
+        		android:layout_marginRight="@dimen/item_text_margin_hor"
+        		android:layout_marginBottom="@dimen/item_text_margin_vert"
+                android:layout_toRightOf="@+id/item3_image"
+                android:gravity="right"
+                android:text=""
+                android:textColor="@color/netflix_red"
+                android:textSize="@dimen/item_font_size_small" />
+
+        </RelativeLayout>
+        
+        <RelativeLayout
+            android:id="@+id/item1"
+            app:layout_column="2"
+            app:layout_columnSpan="1"
+            app:layout_row="2"
+            app:layout_rowSpan="1"
+            android:layout_marginBottom="4dp"
+            android:background="@drawable/item_small_bg"
+            android:paddingBottom="1dp"
+            android:paddingLeft="0dp"
+            android:paddingRight="0dp"
+            android:paddingTop="1dp" >
+
+            <ImageView
+                android:id="@+id/item1_image"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:adjustViewBounds="true"
+                android:background="@color/padding_grey"
+                android:paddingRight="@dimen/image_border_big"
+                android:src="@drawable/movie_back" />
+
+            <fr.eyal.datalib.sample.netflix.ui.LightTextView
+                android:id="@+id/item1_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginBottom="16dp"
+                android:layout_marginLeft="26dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_toRightOf="@+id/item1_image"
+                android:gravity="right"
+                android:paddingBottom="2dp"
+                android:text=""
+                android:textColor="@color/netflix_red"
+                android:textSize="@dimen/item_font_size_small" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/item4"
+            app:layout_column="0"
+            app:layout_row="3"
+            android:layout_marginBottom="4dp"
+            android:layout_marginRight="2dp"
+            android:background="@drawable/item_small_bg"
+            android:paddingBottom="1dp"
+            android:paddingLeft="0dp"
+            android:paddingRight="0dp"
+            android:paddingTop="1dp" >
+
+            <ImageView
+                android:id="@+id/item4_image"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentEnd="false"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:adjustViewBounds="true"
+                android:background="@color/padding_grey"
+                android:paddingLeft="0dp"
+                android:paddingRight="@dimen/image_border_small"
+                android:scaleType="fitStart"
+                android:src="@drawable/movie_back" />
+
+            <fr.eyal.datalib.sample.netflix.ui.LightTextView
+                android:id="@+id/item4_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="@dimen/item_text_margin_vert"
+		        android:layout_marginLeft="@dimen/item_text_margin_hor"
+		        android:layout_marginRight="@dimen/item_text_margin_hor"
+		        android:layout_marginBottom="@dimen/item_text_margin_vert"
+                android:layout_toRightOf="@+id/item4_image"
+                android:gravity="right"
+                android:text=""
+                android:textColor="@color/netflix_red"
+                android:textSize="@dimen/item_font_size_small" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/item5"
+            app:layout_column="1"
+            app:layout_row="3"
+            android:layout_marginBottom="4dp"
+            android:layout_marginLeft="2dp"
+            android:background="@drawable/item_small_bg"
+            android:paddingBottom="1dp"
+            android:paddingLeft="0dp"
+            android:paddingRight="0dp"
+            android:paddingTop="1dp" >
+
+            <ImageView
+                android:id="@+id/item5_image"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:adjustViewBounds="true"
+                android:background="@color/padding_grey"
+                android:paddingLeft="0dp"
+                android:paddingRight="@dimen/image_border_small"
+                android:scaleType="fitStart"
+                android:src="@drawable/movie_back" />
+
+            <fr.eyal.datalib.sample.netflix.ui.LightTextView
+                android:id="@+id/item5_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="@dimen/item_text_margin_vert"
+		        android:layout_marginLeft="@dimen/item_text_margin_hor"
+		        android:layout_marginRight="@dimen/item_text_margin_hor"
+		        android:layout_marginBottom="@dimen/item_text_margin_vert"
+                android:layout_toRightOf="@+id/item5_image"
+                android:gravity="right"
+                android:text=""
+                android:textColor="@color/netflix_red"
+                android:textSize="@dimen/item_font_size_small" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/item1"
+            app:layout_column="2"
+            app:layout_columnSpan="1"
+            app:layout_row="3"
+            app:layout_rowSpan="1"
+            android:layout_marginBottom="4dp"
+            android:background="@drawable/item_small_bg"
+            android:paddingBottom="1dp"
+            android:paddingLeft="0dp"
+            android:paddingRight="0dp"
+            android:paddingTop="1dp" >
+
+            <ImageView
+                android:id="@+id/item1_image"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:adjustViewBounds="true"
+                android:background="@color/padding_grey"
+                android:paddingRight="@dimen/image_border_big"
+                android:src="@drawable/movie_back" />
+
+            <fr.eyal.datalib.sample.netflix.ui.LightTextView
+                android:id="@+id/item1_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginBottom="16dp"
+                android:layout_marginLeft="26dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_toRightOf="@+id/item1_image"
+                android:gravity="right"
+                android:paddingBottom="2dp"
+                android:text=""
+                android:textColor="@color/netflix_red"
+                android:textSize="@dimen/item_font_size_small" />
+
+        </RelativeLayout>
+        
+        <RelativeLayout
+            android:id="@+id/item6"
+            app:layout_column="0"
+            app:layout_columnSpan="2"
+            app:layout_row="4"
+            app:layout_rowSpan="2"
+            android:layout_marginBottom="4dp"
+            android:background="@drawable/item_small_bg"
+            android:paddingBottom="1dp"
+            android:paddingLeft="0dp"
+            android:paddingRight="0dp"
+            android:paddingTop="1dp" >
+
+            <ImageView
+                android:id="@+id/item6_image"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:adjustViewBounds="true"
+                android:background="@color/padding_grey"
+                android:paddingRight="@dimen/image_border_big"
+                android:src="@drawable/movie_back" />
+
+            <fr.eyal.datalib.sample.netflix.ui.LightTextViewUnderlined
+                android:id="@+id/item6_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginBottom="16dp"
+                android:layout_marginLeft="26dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_toRightOf="@+id/item6_image"
+                android:gravity="right"
+                android:paddingBottom="2dp"
+                android:text=""
+                android:textColor="@color/netflix_red"
+                android:textSize="@dimen/item_font_size" />
+
+        </RelativeLayout>
+        
+        <RelativeLayout
+            android:id="@+id/item1"
+            app:layout_column="2"
+            app:layout_columnSpan="1"
+            app:layout_row="4"
+            app:layout_rowSpan="1"
+            android:layout_marginBottom="4dp"
+            android:background="@drawable/item_small_bg"
+            android:paddingBottom="1dp"
+            android:paddingLeft="0dp"
+            android:paddingRight="0dp"
+            android:paddingTop="1dp" >
+
+            <ImageView
+                android:id="@+id/item1_image"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:adjustViewBounds="true"
+                android:background="@color/padding_grey"
+                android:paddingRight="@dimen/image_border_big"
+                android:src="@drawable/movie_back" />
+
+            <fr.eyal.datalib.sample.netflix.ui.LightTextView
+                android:id="@+id/item1_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginBottom="16dp"
+                android:layout_marginLeft="26dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_toRightOf="@+id/item1_image"
+                android:gravity="right"
+                android:paddingBottom="2dp"
+                android:text=""
+                android:textColor="@color/netflix_red"
+                android:textSize="@dimen/item_font_size_small" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/item1"
+            app:layout_column="2"
+            app:layout_columnSpan="1"
+            app:layout_row="5"
+            app:layout_rowSpan="1"
+            android:layout_marginBottom="4dp"
+            android:background="@drawable/item_small_bg"
+            android:paddingBottom="1dp"
+            android:paddingLeft="0dp"
+            android:paddingRight="0dp"
+            android:paddingTop="1dp" >
+
+            <ImageView
+                android:id="@+id/item1_image"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:adjustViewBounds="true"
+                android:background="@color/padding_grey"
+                android:paddingRight="@dimen/image_border_big"
+                android:src="@drawable/movie_back" />
+
+            <fr.eyal.datalib.sample.netflix.ui.LightTextView
+                android:id="@+id/item1_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginBottom="16dp"
+                android:layout_marginLeft="26dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_toRightOf="@+id/item1_image"
+                android:gravity="right"
+                android:paddingBottom="2dp"
+                android:text=""
+                android:textColor="@color/netflix_red"
+                android:textSize="@dimen/item_font_size_small" />
+
+        </RelativeLayout>
+        
+        <RelativeLayout
+            android:id="@+id/item7"
+            app:layout_column="0"
+            app:layout_row="6"
+            android:layout_marginBottom="2dp"
+            android:layout_marginLeft="2dp"
+            android:background="@drawable/item_small_bg"
+            android:paddingBottom="1dp"
+            android:paddingLeft="0dp"
+            android:paddingRight="0dp"
+            android:paddingTop="1dp" >
+
+            <ImageView
+                android:id="@+id/item7_image"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:adjustViewBounds="true"
+                android:background="@color/padding_grey"
+                android:paddingLeft="0dp"
+                android:paddingRight="@dimen/image_border_small"
+                android:scaleType="fitStart"
+                android:src="@drawable/movie_back" />
+
+            <fr.eyal.datalib.sample.netflix.ui.LightTextView
+                android:id="@+id/item7_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="@dimen/item_text_margin_vert"
+		        android:layout_marginLeft="@dimen/item_text_margin_hor"
+		        android:layout_marginRight="@dimen/item_text_margin_hor"
+		        android:layout_marginBottom="@dimen/item_text_margin_vert"
+                android:layout_toRightOf="@+id/item7_image"
+                android:gravity="right"
+                android:text=""
+                android:textColor="@color/netflix_red"
+                android:textSize="@dimen/item_font_size_small" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/item8"
+            app:layout_column="1"
+            app:layout_row="6"
+            android:layout_marginBottom="4dp"
+            android:layout_marginRight="2dp"
+            android:background="@drawable/item_small_bg"
+            android:paddingBottom="1dp"
+            android:paddingLeft="0dp"
+            android:paddingRight="0dp"
+            android:paddingTop="1dp" >
+
+            <ImageView
+                android:id="@+id/item8_image"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentEnd="false"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:adjustViewBounds="true"
+                android:background="@color/padding_grey"
+                android:paddingLeft="0dp"
+				android:paddingRight="@dimen/image_border_small"
+                android:scaleType="fitStart"
+                android:src="@drawable/movie_back" />
+
+            <fr.eyal.datalib.sample.netflix.ui.LightTextView
+                android:id="@+id/item8_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="@dimen/item_text_margin_vert"
+		        android:layout_marginLeft="@dimen/item_text_margin_hor"
+		        android:layout_marginRight="@dimen/item_text_margin_hor"
+		        android:layout_marginBottom="@dimen/item_text_margin_vert"
+                android:layout_toRightOf="@+id/item8_image"
+                android:gravity="right"
+                android:text=""
+                android:textColor="@color/netflix_red"
+                android:textSize="@dimen/item_font_size_small" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/item1"
+            app:layout_column="2"
+            app:layout_columnSpan="1"
+            app:layout_row="6"
+            app:layout_rowSpan="1"
+            android:layout_marginBottom="4dp"
+            android:background="@drawable/item_small_bg"
+            android:paddingBottom="1dp"
+            android:paddingLeft="0dp"
+            android:paddingRight="0dp"
+            android:paddingTop="1dp" >
+
+            <ImageView
+                android:id="@+id/item1_image"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:adjustViewBounds="true"
+                android:background="@color/padding_grey"
+                android:paddingRight="@dimen/image_border_big"
+                android:src="@drawable/movie_back" />
+
+            <fr.eyal.datalib.sample.netflix.ui.LightTextView
+                android:id="@+id/item1_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginBottom="16dp"
+                android:layout_marginLeft="26dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_toRightOf="@+id/item1_image"
+                android:gravity="right"
+                android:paddingBottom="2dp"
+                android:text=""
+                android:textColor="@color/netflix_red"
+                android:textSize="@dimen/item_font_size_small" />
+
+        </RelativeLayout>
+        
+        <RelativeLayout
+            android:id="@+id/item9"
+            app:layout_column="0"
+            android:layout_marginBottom="4dp"
+            android:layout_marginLeft="2dp"
+            app:layout_row="7"
+            android:background="@drawable/item_small_bg"
+            android:paddingBottom="1dp"
+            android:paddingLeft="0dp"
+            android:paddingRight="0dp"
+            android:paddingTop="1dp" >
+
+            <ImageView
+                android:id="@+id/item9_image"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:adjustViewBounds="true"
+                android:background="@color/padding_grey"
+                android:paddingLeft="0dp"
+                android:paddingRight="@dimen/image_border_small"
+                android:scaleType="fitStart"
+                android:src="@drawable/movie_back" />
+
+            <fr.eyal.datalib.sample.netflix.ui.LightTextView
+                android:id="@+id/item9_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="@dimen/item_text_margin_vert"
+		        android:layout_marginLeft="@dimen/item_text_margin_hor"
+		        android:layout_marginRight="@dimen/item_text_margin_hor"
+		        android:layout_marginBottom="@dimen/item_text_margin_vert"
+                android:layout_toRightOf="@+id/item9_image"
+                android:gravity="right"
+                android:text=""
+                android:textColor="@color/netflix_red"
+                android:textSize="@dimen/item_font_size_small" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/item10"
+            app:layout_column="1"
+            app:layout_row="7"
+            android:background="@drawable/item_small_bg"
+            android:paddingBottom="1dp"
+            android:paddingLeft="0dp"
+            android:paddingRight="0dp"
+            android:paddingTop="1dp" >
+
+            <ImageView
+                android:id="@+id/item10_image"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:adjustViewBounds="true"
+                android:background="@color/padding_grey"
+                android:paddingLeft="0dp"
+                android:paddingRight="@dimen/image_border_small"
+                android:scaleType="fitStart"
+                android:src="@drawable/movie_back" />
+
+            <fr.eyal.datalib.sample.netflix.ui.LightTextView
+                android:id="@+id/item10_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="@dimen/item_text_margin_vert"
+		        android:layout_marginLeft="@dimen/item_text_margin_hor"
+		        android:layout_marginRight="@dimen/item_text_margin_hor"
+		        android:layout_marginBottom="@dimen/item_text_margin_vert"
+                android:layout_toRightOf="@+id/item10_image"
+                android:gravity="right"
+                android:text=""
+                android:textColor="@color/netflix_red"
+                android:textSize="@dimen/item_font_size_small" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/item1"
+            app:layout_column="2"
+            app:layout_columnSpan="1"
+            app:layout_row="7"
+            app:layout_rowSpan="1"
+            android:layout_marginBottom="4dp"
+            android:background="@drawable/item_small_bg"
+            android:paddingBottom="1dp"
+            android:paddingLeft="0dp"
+            android:paddingRight="0dp"
+            android:paddingTop="1dp" >
+
+            <ImageView
+                android:id="@+id/item1_image"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:adjustViewBounds="true"
+                android:background="@color/padding_grey"
+                android:paddingRight="@dimen/image_border_big"
+                android:src="@drawable/movie_back" />
+
+            <fr.eyal.datalib.sample.netflix.ui.LightTextView
+                android:id="@+id/item1_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginBottom="16dp"
+                android:layout_marginLeft="26dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_toRightOf="@+id/item1_image"
+                android:gravity="right"
+                android:paddingBottom="2dp"
+                android:text=""
+                android:textColor="@color/netflix_red"
+                android:textSize="@dimen/item_font_size_small" />
+
+        </RelativeLayout>
+        
+        <RelativeLayout
+            android:id="@+id/item11"
+            app:layout_column="0"
+            android:layout_marginBottom="2dp"
+            android:layout_marginLeft="2dp"
+            app:layout_row="8"
+            android:background="@drawable/item_small_bg"
+            android:paddingBottom="1dp"
+            android:paddingLeft="0dp"
+            android:paddingRight="0dp"
+            android:paddingTop="1dp" >
+
+            <ImageView
+                android:id="@+id/item11_image"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:adjustViewBounds="true"
+                android:background="@color/padding_grey"
+                android:paddingLeft="0dp"
+                android:paddingRight="@dimen/image_border_small"
+                android:scaleType="fitStart"
+                android:src="@drawable/movie_back" />
+
+            <fr.eyal.datalib.sample.netflix.ui.LightTextView
+                android:id="@+id/item11_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="@dimen/item_text_margin_vert"
+		        android:layout_marginLeft="@dimen/item_text_margin_hor"
+		        android:layout_marginRight="@dimen/item_text_margin_hor"
+		        android:layout_marginBottom="@dimen/item_text_margin_vert"
+                android:layout_toRightOf="@+id/item11_image"
+                android:gravity="right"
+                android:text=""
+                android:textColor="@color/netflix_red"
+                android:textSize="@dimen/item_font_size_small" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/item12"
+            app:layout_column="1"
+            android:layout_marginBottom="4dp"
+            android:layout_marginRight="2dp"
+            app:layout_row="8"
+            android:background="@drawable/item_small_bg"
+            android:paddingBottom="1dp"
+            android:paddingLeft="0dp"
+            android:paddingRight="0dp"
+            android:paddingTop="1dp" >
+
+            <ImageView
+                android:id="@+id/item12_image"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentEnd="false"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:adjustViewBounds="true"
+                android:background="@color/padding_grey"
+                android:paddingLeft="0dp"
+                android:paddingRight="@dimen/image_border_small"
+                android:scaleType="fitStart"
+                android:src="@drawable/movie_back" />
+
+            <fr.eyal.datalib.sample.netflix.ui.LightTextView
+                android:id="@+id/item12_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="@dimen/item_text_margin_vert"
+		        android:layout_marginLeft="@dimen/item_text_margin_hor"
+		        android:layout_marginRight="@dimen/item_text_margin_hor"
+		        android:layout_marginBottom="@dimen/item_text_margin_vert"
+                android:layout_toRightOf="@+id/item12_image"
+                android:gravity="right"
+                android:text=""
+                android:textColor="@color/netflix_red"
+                android:textSize="@dimen/item_font_size_small" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/item13"
+            app:layout_column="0"
+            android:layout_marginBottom="4dp"
+            android:layout_marginLeft="2dp"
+            app:layout_row="9"
+            android:background="@drawable/item_small_bg"
+            android:paddingBottom="1dp"
+            android:paddingLeft="0dp"
+            android:paddingRight="0dp"
+            android:paddingTop="1dp" >
+
+            <ImageView
+                android:id="@+id/item13_image"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:adjustViewBounds="true"
+                android:background="@color/padding_grey"
+                android:paddingLeft="0dp"
+                android:paddingRight="@dimen/image_border_small"
+                android:scaleType="fitStart"
+                android:src="@drawable/movie_back" />
+
+            <fr.eyal.datalib.sample.netflix.ui.LightTextView
+                android:id="@+id/item13_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="@dimen/item_text_margin_vert"
+		        android:layout_marginLeft="@dimen/item_text_margin_hor"
+		        android:layout_marginRight="@dimen/item_text_margin_hor"
+		        android:layout_marginBottom="@dimen/item_text_margin_vert"
+                android:layout_toRightOf="@+id/item13_image"
+                android:gravity="right"
+                android:text=""
+                android:textColor="@color/netflix_red"
+                android:textSize="@dimen/item_font_size_small" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/item14"
+            app:layout_column="1"
+            app:layout_row="9"
+            android:background="@drawable/item_small_bg"
+            android:paddingBottom="1dp"
+            android:paddingLeft="0dp"
+            android:paddingRight="0dp"
+            android:paddingTop="1dp" >
+
+            <ImageView
+                android:id="@+id/item14_image"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:adjustViewBounds="true"
+                android:background="@color/padding_grey"
+                android:paddingLeft="0dp"
+                android:paddingRight="@dimen/image_border_small"
+                android:scaleType="fitStart"
+                android:src="@drawable/movie_back" />
+
+            <fr.eyal.datalib.sample.netflix.ui.LightTextView
+                android:id="@+id/item14_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="@dimen/item_text_margin_vert"
+		        android:layout_marginLeft="@dimen/item_text_margin_hor"
+		        android:layout_marginRight="@dimen/item_text_margin_hor"
+		        android:layout_marginBottom="@dimen/item_text_margin_vert"
+                android:layout_toRightOf="@+id/item14_image"
+                android:gravity="right"
+                android:text=""
+                android:textColor="@color/netflix_red"
+                android:textSize="@dimen/item_font_size_small" />
+        </RelativeLayout>
+        
+        
+        
+        
+    </fr.eyal.datalib.sample.netflix.ui.GridLayout>
+
+</ScrollView>

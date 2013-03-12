@@ -1,4 +1,4 @@
-package fr.eyal.datalib.sample.netflix.fragment;
+package fr.eyal.datalib.sample.netflix.fragment.model;
 
 import java.lang.ref.SoftReference;
 
@@ -64,4 +64,11 @@ public interface MovieItem {
      * @return the item image
      */
     public MovieImage getImage();
+    
+    /**
+     * Get the movie id
+     * 
+     * @return the movie id
+     */
+    public String getId();
 }

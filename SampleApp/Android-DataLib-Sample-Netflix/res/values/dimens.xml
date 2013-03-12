@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <dimen name="image_border_big">8dp</dimen>
     <dimen name="image_border_small">4dp</dimen>
     <dimen name="item_height">166dp</dimen>
@@ -10,4 +11,7 @@
     <dimen name="item_margin_row">2dp</dimen>
     <dimen name="item_text_margin_vert">16dp</dimen>
     <dimen name="item_text_margin_hor">12dp</dimen>
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
 </resources>

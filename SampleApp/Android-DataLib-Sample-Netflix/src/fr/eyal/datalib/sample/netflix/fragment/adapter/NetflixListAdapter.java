@@ -1,4 +1,4 @@
-package fr.eyal.datalib.sample.netflix.fragment;
+package fr.eyal.datalib.sample.netflix.fragment.adapter;
 
 import java.util.ArrayList;
 
@@ -21,6 +21,8 @@ import android.widget.TextView;
 import fr.eyal.datalib.sample.cache.BitmapMemoryLruCache;
 import fr.eyal.datalib.sample.cache.CacheableBitmapDrawable;
 import fr.eyal.datalib.sample.netflix.R;
+import fr.eyal.datalib.sample.netflix.fragment.NetflixListFragment;
+import fr.eyal.datalib.sample.netflix.fragment.model.MovieItem;
 import fr.eyal.datalib.sample.netflix.util.Resources;
 
 /**
@@ -29,7 +31,7 @@ import fr.eyal.datalib.sample.netflix.util.Resources;
  */
 public class NetflixListAdapter extends BaseAdapter implements OnScrollListener, RecyclerListener{
 
-	ArrayList<MovieItem> mArray = new ArrayList<MovieItem>();
+	private ArrayList<MovieItem> mArray = new ArrayList<MovieItem>();
 	NetflixListFragment mFragment;
 	GridView mGridParent = null;
 	UpdateContent mUpdateContentRunnable = new UpdateContent();
@@ -41,21 +43,21 @@ public class NetflixListAdapter extends BaseAdapter implements OnScrollListener,
 	public NetflixListAdapter(NetflixListFragment fragment) {
 		super();
 		mFragment = fragment;
-		mArray = new ArrayList<MovieItem>();
+		setData(new ArrayList<MovieItem>());
 		mBitmapCache = Resources.getInstance().mBitmapCache;
 	}
 	
 	@Override
 	public int getCount() {
-		if(mArray != null)
-			return mArray.size();
+		if(getData() != null)
+			return getData().size();
 		return 0;
 	}
 
 	@Override
 	public Object getItem(int position) {
-		if(mArray != null)
-			return mArray.get(position);
+		if(getData() != null)
+			return getData().get(position);
 		return null;
 	}
 
@@ -89,7 +91,7 @@ public class NetflixListAdapter extends BaseAdapter implements OnScrollListener,
             holder = (ItemViewHolder) convertView.getTag();
         }
 
-		MovieItem item = mArray.get(position);
+		MovieItem item = getData().get(position);
 		holder.item = item;
 
 		if(item != null){
@@ -137,7 +139,7 @@ public class NetflixListAdapter extends BaseAdapter implements OnScrollListener,
 		return false;
 	}
 
-	static class ItemViewHolder{
+	public static class ItemViewHolder{
 		ImageView image;
 		TextView text;
 		MovieItem item;
@@ -153,7 +155,7 @@ public class NetflixListAdapter extends BaseAdapter implements OnScrollListener,
 		//if we have the parent view
 		if(mGridParent != null){
 			
-			int position = mArray.indexOf(movie);
+			int position = getData().indexOf(movie);
 			if(position < 0)
 				return;
 			
@@ -291,6 +293,20 @@ public class NetflixListAdapter extends BaseAdapter implements OnScrollListener,
 			if(cacheBitmap != null)
 				cacheBitmap.setBeingUsed(false);
 		}
+	}
+
+	/**
+	 * @return the mArray
+	 */
+	public ArrayList<MovieItem> getData() {
+		return mArray;
+	}
+
+	/**
+	 * @param mArray the mArray to set
+	 */
+	public void setData(ArrayList<MovieItem> mArray) {
+		this.mArray = mArray;
 	}
 
 }
