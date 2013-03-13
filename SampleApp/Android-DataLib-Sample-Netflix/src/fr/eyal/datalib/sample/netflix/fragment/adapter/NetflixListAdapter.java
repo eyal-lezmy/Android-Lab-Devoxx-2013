@@ -140,9 +140,9 @@ public class NetflixListAdapter extends BaseAdapter implements OnScrollListener,
 	}
 
 	public static class ItemViewHolder{
-		ImageView image;
-		TextView text;
-		MovieItem item;
+		public ImageView image;
+		public TextView text;
+		public MovieItem item;
 	}
 	
 	public void updatePoster(MovieItem movie){
