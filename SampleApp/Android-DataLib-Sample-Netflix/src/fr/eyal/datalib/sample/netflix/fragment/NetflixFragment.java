@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import fr.eyal.datalib.sample.netflix.data.service.NetflixDataManager;
 import fr.eyal.lib.data.service.DataManager.OnDataListener;
+import fr.eyal.lib.util.Out;
 
 public abstract class NetflixFragment extends Fragment implements OnDataListener {
 
@@ -18,13 +19,12 @@ public abstract class NetflixFragment extends Fragment implements OnDataListener
 	/**
 	 * List of requests currently running for this activity
 	 */
-	protected ArrayList<Integer> mRequestIds;
+	final protected ArrayList<Integer> mRequestIds = new ArrayList<Integer>();
 	
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		
-		mRequestIds = new ArrayList<Integer>();
 		mDataManager = NetflixDataManager.getInstance(getActivity());
 
 		super.onCreate(savedInstanceState);
@@ -35,8 +35,11 @@ public abstract class NetflixFragment extends Fragment implements OnDataListener
 		if(mRequestIds != null && mDataManager != null){
 			// we launch the request's data reception
 			synchronized (mRequestIds) {
-				for (final int requestId : mRequestIds) {
-					mDataManager.addOnDataListener(requestId, this);
+				for (final Integer requestId : mRequestIds) {
+					if(requestId != null) 
+						mDataManager.addOnDataListener(requestId, this);
+					else
+						Out.e("", "REQUEST ID NULL !!!!!!!!!!!!!");
 				}
 			}
 		}
@@ -48,8 +51,11 @@ public abstract class NetflixFragment extends Fragment implements OnDataListener
 		if(mRequestIds != null && mDataManager != null){
 			// we stop the request's data reception
 			synchronized (mRequestIds) {
-				for (final int requestId : mRequestIds) {
-					mDataManager.removeOnDataListener(requestId, this);
+				for (final Integer requestId : mRequestIds) {
+					if(requestId != null)
+						mDataManager.removeOnDataListener(requestId, this);
+					else
+						Out.e("", "REQUEST ID NULL !!!!!!!!!!!!!");
 				}
 			}
 		}
