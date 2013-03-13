@@ -4,7 +4,9 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,9 +22,11 @@ import fr.eyal.datalib.sample.netflix.R;
 import fr.eyal.datalib.sample.netflix.data.model.movie.Movie;
 import fr.eyal.datalib.sample.netflix.data.model.movie.MovieCategory;
 import fr.eyal.datalib.sample.netflix.data.model.movieimage.MovieImage;
+import fr.eyal.datalib.sample.netflix.data.model.synopsis.Synopsis;
 import fr.eyal.datalib.sample.netflix.data.service.NetflixDataManager;
 import fr.eyal.datalib.sample.netflix.data.service.NetflixService;
 import fr.eyal.datalib.sample.netflix.fragment.model.MovieItem;
+import fr.eyal.datalib.sample.netflix.util.Util;
 import fr.eyal.lib.data.model.BusinessObjectDAO;
 import fr.eyal.lib.data.model.ResponseBusinessObject;
 import fr.eyal.lib.data.model.ResponseBusinessObjectDAO;
@@ -61,8 +65,11 @@ public class MovieFragment extends NetflixFragment {
 			else
 				mDataType = "movies";
 
+			int movieId = Integer.parseInt(mMovieItem.getId());
+			int id = mDataManager.getMovie(DataManager.TYPE_CACHE, this, mDataType, movieId, DataLibRequest.OPTION_NO_OPTION, null, null);
+			mRequestIds.add(id);
 
-			int id = mDataManager.getMovie(DataManager.TYPE_NETWORK, this, mDataType, Integer.parseInt(mMovieItem.getId()), DataLibRequest.OPTION_NO_OPTION, null, null);
+			id = mDataManager.getSynopsis(DataManager.TYPE_CACHE, this, movieId, DataLibRequest.OPTION_NO_OPTION, null, null);
 			mRequestIds.add(id);
 
 		} catch (UnsupportedEncodingException e) {
@@ -88,15 +95,21 @@ public class MovieFragment extends NetflixFragment {
 		mTxtTitle.setText(mMovieItem.getLabel(-1));
 		
 		Bitmap bmp = mMovieItem.getPoster(false);
+		
 		if(bmp != null) {
-			mImage.setImageBitmap(bmp);
-		} else {
-			try {
-				int id = mDataManager.getMovieImage(DataManager.TYPE_CACHE, this, mMovieItem.getImageUrl(), DataLibRequest.OPTION_NO_OPTION, null, null);
-				mRequestIds.add(id);
-			} catch (UnsupportedEncodingException e) {
-				e.printStackTrace();
-			}
+			
+//			float width = getResources().getDimension(R.dimen.movie_image_width);
+//			float height = width * bmp.getHeight() / bmp.getWidth();
+//			Util.scaleBitmap(bmp, width, height, Util.ScalingLogic.FIT);
+
+			mImage.setImageDrawable(new BitmapDrawable(getResources(), bmp));
+		}
+		
+		try {
+			int id = mDataManager.getMovieImage(DataManager.TYPE_CACHE, this, mMovieItem.getImageUrl(), DataLibRequest.OPTION_NO_OPTION, null, null);
+			mRequestIds.add(id);
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
 		}
 		
 		return scrollView;
@@ -114,6 +127,16 @@ public class MovieFragment extends NetflixFragment {
 				if(bmp != null)
 				mImage.post(new UpdatePoster(bmp, mImage));
 			} else {
+				try {
+					int id = mDataManager.getMovieImage(DataManager.TYPE_NETWORK, this, mMovieItem.getImageUrl(), DataLibRequest.OPTION_NO_OPTION, null, null);
+					mRequestIds.add(id);
+					
+				} catch (NumberFormatException e) {
+					e.printStackTrace();
+				} catch (UnsupportedEncodingException e) {
+					e.printStackTrace();
+				}
+				
 				
 			}
 
@@ -150,18 +173,18 @@ public class MovieFragment extends NetflixFragment {
 	@Override
 	public void onRequestFinished(int requestId, boolean suceed, BusinessResponse response) {
 		if(!suceed){
-			if(response.response instanceof ResponseBusinessObjectDAO){
-				try {
-					int id = mDataManager.getMovie(DataManager.TYPE_NETWORK, this, mDataType, Integer.parseInt(mMovieItem.getId()), DataLibRequest.OPTION_NO_OPTION, null, null);
-					mRequestIds.add(id);
-					
-				} catch (NumberFormatException e) {
-					e.printStackTrace();
-				} catch (UnsupportedEncodingException e) {
-					e.printStackTrace();
-				}
-			}
-			return;
+//			if(response.response instanceof ResponseBusinessObjectDAO){
+//				try {
+//					int id = mDataManager.getMovie(DataManager.TYPE_NETWORK, this, mDataType, Integer.parseInt(mMovieItem.getId()), DataLibRequest.OPTION_NO_OPTION, null, null);
+//					mRequestIds.add(id);
+//					
+//				} catch (NumberFormatException e) {
+//					e.printStackTrace();
+//				} catch (UnsupportedEncodingException e) {
+//					e.printStackTrace();
+//				}
+//			}
+//			return;
 		}
 		
 		switch (response.webserviceType) {
@@ -170,6 +193,13 @@ public class MovieFragment extends NetflixFragment {
 
 			Movie movie = (Movie) response.response;
 			mTxtTitle.post(new UpdateContent(movie));
+			
+			break;
+
+		case NetflixService.WEBSERVICE_SYNOPSIS:
+
+			Synopsis synopsis = (Synopsis) response.response;
+			mTxtTitle.post(new UpdateContent(synopsis));
 			
 			break;
 
@@ -209,22 +239,53 @@ public class MovieFragment extends NetflixFragment {
 	public class UpdateContent implements Runnable {
 
 		Movie mMovie;
+		Synopsis mSynopsis;
 		
 		public UpdateContent(Movie movie){
 			mMovie = movie;
 		}
-		
+
+		public UpdateContent(Synopsis synopsis){
+			mSynopsis = synopsis;
+		}
+
 		@Override
 		public void run() {
-			mTxtTitle.setText(mMovie.attrTitleRegular);
-			mTxtYear.setText(""+mMovie.release_year);
-			mTxtTime.setText(""+mMovie.runtime);
 			
-			ArrayList<MovieCategory> categories = mMovie.movieCategory;
-			if(categories.size() > 0)
-				mTxtCategory.setText(categories.get(0).attrLabel);
-			else
-				mTxtCategory.setText("");
+			if(mMovie != null) {
+				mTxtTitle.setText(mMovie.attrTitleRegular);
+				mTxtYear.setText(""+mMovie.release_year);
+				
+				int runtime = mMovie.runtime;
+				int hours = runtime/3600;
+				int minutes = (runtime%3600)/60;
+				int seconds = runtime%60;
+				
+				StringBuilder builder = new StringBuilder();
+				if(hours > 0){
+					builder.append(hours);
+					builder.append("h ");
+				}
+				if(hours > 0 || minutes > 0) {
+					builder.append(minutes);
+					builder.append("m ");
+				}
+				if(hours <= 0) {
+					builder.append(seconds);
+					builder.append("s");
+				}
+				mTxtTime.setText(builder.toString());
+				
+				ArrayList<MovieCategory> categories = mMovie.movieCategory;
+				if(categories.size() > 1)
+					mTxtCategory.setText(categories.get(1).attrLabel);
+				else
+					mTxtCategory.setText("");				
+			}
+			
+			if(mSynopsis != null) {
+				mTxtSynopsis.setText(Html.fromHtml(mSynopsis.synopsis));
+			}
 		}
 	}
 
