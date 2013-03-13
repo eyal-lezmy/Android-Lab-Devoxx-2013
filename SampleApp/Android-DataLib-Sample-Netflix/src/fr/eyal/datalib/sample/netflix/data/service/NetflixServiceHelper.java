@@ -23,7 +23,7 @@ public class NetflixServiceHelper extends ServiceHelper {
 	    public static final String URL_CATALOGTITLES = "http://api-public.netflix.com/catalog/titles";
 	    public static final String URL_PEOPLE = "http://api-public.netflix.com/catalog/people/{0}";
 	    public static final String URL_FILMOGRAPHY = "http://api-public.netflix.com/catalog/people/{0}/filmography";
-	    public static final String URL_MOVIE = "http://api-public.netflix.com/catalog/titles/movies/{0}";
+	    public static final String URL_MOVIE = "http://api-public.netflix.com/catalog/titles/{0}/{1}";
 	    public static final String URL_SYNOPSIS = "http://api-public.netflix.com/catalog/titles/movies/{0}/synopsis";
 	    public static final String URL_CAST = "http://api-public.netflix.com/catalog/titles/movies/{0}/cast";
 	    public static final String URL_DIRECTORS = "http://api-public.netflix.com/catalog/titles/movies/{0}/directors";
@@ -307,6 +307,7 @@ public class NetflixServiceHelper extends ServiceHelper {
     /**
      * Start {@link Movie} request
      * 
+     * @param type Type you are looking for. It can be 'movies', 'series' or 'programs'. To disable the adding of it, just define it as null
      * @param movie_id Movie's ID. To disable the adding of it, just define it as null
      * @param oauth_consumer_key The OAuth consumer key of the developer. To disable the adding of it, just define it as null
      * @param oauth_nonce A random string. To disable the adding of it, just define it as null
@@ -321,7 +322,7 @@ public class NetflixServiceHelper extends ServiceHelper {
      * 
      * @throws UnsupportedEncodingException
      */
-	public int getMovie(final int movie_id, final String oauth_consumer_key, final String oauth_nonce, final String oauth_signature_method, final int oauth_timestamp, final String oauth_signature,  final int options, ComplexOptions complexOptionsNetwork) throws UnsupportedEncodingException {
+	public int getMovie(final String type, final int movie_id, final String oauth_consumer_key, final String oauth_nonce, final String oauth_signature_method, final int oauth_timestamp, final String oauth_signature,  final int options, ComplexOptions complexOptionsNetwork) throws UnsupportedEncodingException {
 		
 		//we prepare the parameters
 		final ParameterMap params = new ParameterMap();
@@ -332,7 +333,7 @@ public class NetflixServiceHelper extends ServiceHelper {
 		params.put("oauth_signature", oauth_signature);
 		
 		//we prepare the request's url
-		final String __url = MessageFormat.format(NetflixServiceHelper.URL_MOVIE, movie_id+"");
+		final String __url = MessageFormat.format(NetflixServiceHelper.URL_MOVIE, type, movie_id+"");
 		
         
         return launchRequest(options, NetflixService.WEBSERVICE_MOVIE, params, NetflixService.class, __url, complexOptionsNetwork);

@@ -20,12 +20,14 @@ import fr.eyal.datalib.sample.netflix.R;
 import fr.eyal.datalib.sample.netflix.data.model.movie.Movie;
 import fr.eyal.datalib.sample.netflix.data.model.movie.MovieCategory;
 import fr.eyal.datalib.sample.netflix.data.model.movieimage.MovieImage;
+import fr.eyal.datalib.sample.netflix.data.service.NetflixDataManager;
 import fr.eyal.datalib.sample.netflix.data.service.NetflixService;
 import fr.eyal.datalib.sample.netflix.fragment.model.MovieItem;
 import fr.eyal.lib.data.model.BusinessObjectDAO;
 import fr.eyal.lib.data.model.ResponseBusinessObject;
 import fr.eyal.lib.data.model.ResponseBusinessObjectDAO;
 import fr.eyal.lib.data.service.DataManager;
+import fr.eyal.lib.data.service.ServiceHelper;
 import fr.eyal.lib.data.service.model.BusinessResponse;
 import fr.eyal.lib.data.service.model.DataLibRequest;
 
@@ -42,7 +44,8 @@ public class MovieFragment extends NetflixFragment {
 	TextView mTxtCast1;
 	TextView mTxtCast2;
 	ImageView mImage;
-
+	String mDataType;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		Bundle extras = getActivity().getIntent().getExtras();
@@ -52,11 +55,20 @@ public class MovieFragment extends NetflixFragment {
 		super.onCreate(savedInstanceState);
 		
 		try {
-			int id = mDataManager.getMovie(DataManager.TYPE_NETWORK, this, Integer.parseInt(mMovieItem.getId()), DataLibRequest.OPTION_NO_OPTION, null, null);
+
+			if(mMovieItem.getLabel(-1).contains("Season"))
+				mDataType = "series";
+			else
+				mDataType = "movies";
+
+
+			int id = mDataManager.getMovie(DataManager.TYPE_NETWORK, this, mDataType, Integer.parseInt(mMovieItem.getId()), DataLibRequest.OPTION_NO_OPTION, null, null);
 			mRequestIds.add(id);
+
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
+		
 	}
 	
 	@Override
@@ -115,7 +127,7 @@ public class MovieFragment extends NetflixFragment {
 				
 			} else {
 				try {
-					int id = mDataManager.getMovie(DataManager.TYPE_NETWORK, this, Integer.parseInt(mMovieItem.getId()), DataLibRequest.OPTION_NO_OPTION, null, null);
+					int id = mDataManager.getMovie(DataManager.TYPE_NETWORK, this, mDataType, Integer.parseInt(mMovieItem.getId()), DataLibRequest.OPTION_NO_OPTION, null, null);
 					mRequestIds.add(id);
 					
 				} catch (NumberFormatException e) {
@@ -140,7 +152,7 @@ public class MovieFragment extends NetflixFragment {
 		if(!suceed){
 			if(response.response instanceof ResponseBusinessObjectDAO){
 				try {
-					int id = mDataManager.getMovie(DataManager.TYPE_NETWORK, this, Integer.parseInt(mMovieItem.getId()), DataLibRequest.OPTION_NO_OPTION, null, null);
+					int id = mDataManager.getMovie(DataManager.TYPE_NETWORK, this, mDataType, Integer.parseInt(mMovieItem.getId()), DataLibRequest.OPTION_NO_OPTION, null, null);
 					mRequestIds.add(id);
 					
 				} catch (NumberFormatException e) {

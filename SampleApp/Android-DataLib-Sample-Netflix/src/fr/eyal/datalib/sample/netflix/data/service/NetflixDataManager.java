@@ -2,8 +2,6 @@ package fr.eyal.datalib.sample.netflix.data.service;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.text.MessageFormat;
 
@@ -18,8 +16,6 @@ import fr.eyal.lib.data.service.DataManager;
 import fr.eyal.lib.data.service.ServiceHelper;
 import fr.eyal.lib.data.service.model.DataLibRequest;
 import fr.eyal.lib.data.service.model.ComplexOptions;
-import fr.eyal.datalib.sample.netflix.NetflixConfig;
-import fr.eyal.datalib.sample.netflix.NetflixUtils;
 import fr.eyal.datalib.sample.netflix.data.model.newreleases.*;
 import fr.eyal.datalib.sample.netflix.data.model.movieimage.*;
 import fr.eyal.datalib.sample.netflix.data.model.top100.*;
@@ -35,6 +31,10 @@ import fr.eyal.datalib.sample.netflix.data.model.directors.*;
 import fr.eyal.datalib.sample.netflix.data.model.NetflixProvider;
 // Start of user code NetflixDataManager imports
 // You can add here your personal imports
+import java.util.Calendar;
+import java.security.InvalidKeyException;
+import fr.eyal.datalib.sample.netflix.NetflixConfig;
+import fr.eyal.datalib.sample.netflix.NetflixUtils;
 // DO NOT MODIFY THE GENERATED COMMENTS "Start of user code" and "End of user code
 
 public class NetflixDataManager extends DataManager {
@@ -1968,6 +1968,8 @@ public class NetflixDataManager extends DataManager {
      * and <code>TYPE_NETWORK_OTHERWISE_CACHE</code>). This listener won't be used to send DataLib's response.
      * So, the addOnRequestFinishedListener call is still needed.
      * 
+     * @param type Type you are looking for. It can be 'movies', 'series' or 'programs'
+     * 
      * @param movie_id Movie's ID
      * 
      * @param oauth_consumer_key The OAuth consumer key of the developer
@@ -1997,7 +1999,7 @@ public class NetflixDataManager extends DataManager {
      * 
      * @throws UnsupportedEncodingException
      */
-	public synchronized int getMovie(final int policy, final OnDataListener datacacheListener, final int movie_id, final String oauth_consumer_key, final String oauth_nonce, final String oauth_signature_method, final int oauth_timestamp, final String oauth_signature, final int options, ComplexOptions complexOptionsCache, ComplexOptions complexOptionsNetwork) throws UnsupportedEncodingException {
+	public synchronized int getMovie(final int policy, final OnDataListener datacacheListener, final String type, final int movie_id, final String oauth_consumer_key, final String oauth_nonce, final String oauth_signature_method, final int oauth_timestamp, final String oauth_signature, final int options, ComplexOptions complexOptionsCache, ComplexOptions complexOptionsNetwork) throws UnsupportedEncodingException {
 		//we prepare the parameters
 		final ParameterMap params = new ParameterMap();
 		params.put("oauth_consumer_key", oauth_consumer_key);
@@ -2007,78 +2009,7 @@ public class NetflixDataManager extends DataManager {
 		params.put("oauth_signature", oauth_signature);
 		
 		//we prepare the request's url
-		final String __url = MessageFormat.format(NetflixServiceHelper.URL_MOVIE, movie_id+"");
-		
-        int requestId = launchRequest(mServiceHelper, policy, datacacheListener, params, options, __url, NetflixService.WEBSERVICE_MOVIE, NetflixService.class, complexOptionsCache, complexOptionsNetwork);
-
-		//we add the listener subscription for this request
-		if(datacacheListener != null)
-			this.addOnDataListener(requestId, datacacheListener);
-		
-		return requestId;
-    }
-
-
-    /**
-     * Retrieve the {@link Movie}
-     * 
-     * @param policy Give the policy context of the request using CACHE and/or NETWORK. Accepted values are : 
-     * {@link DataManager#TYPE_NETWORK}, {@link DataManager#TYPE_CACHE}, {@link DataManager#TYPE_CACHE_THEN_NETWORK}
-     * and {@link DataManager#TYPE_NETWORK_OTHERWISE_CACHE}
-     * 
-     * @param datacacheListener The listener who will receive the data from the cache.
-     * This parameter IS NEEDED in case of Datacache access (<code>TYPE_CACHE</code>, <code>TYPE_CACHE_THEN_NETWORK</code>
-     * and <code>TYPE_NETWORK_OTHERWISE_CACHE</code>). This listener won't be used to send DataLib's response.
-     * So, the addOnRequestFinishedListener call is still needed.
-     * 
-     * @param movie_id Movie's ID
-     * 
-     * @param options The options added to the request. The list of constants to use in this filed
-     * can be found in {@link DataLibRequest} (ex: {@link DataLibRequest#OPTION_CONSERVE_COOKIE_ENABLED} 
-     * or {@link DataLibRequest#OPTION_DATABASE_CACHE_DISABLED}, ...).
-     * The options can be aggregated thanks to the pipe character '|' (ex: <code>OPTION_CONSERVE_COOKIE_ENABLED |
-     * OPTION_DATABASE_CACHE_DISABLED</code>).
-     * 
-     * @param complexOptionsCache a {@link ComplexOptions} you want to use when processing the cache request. 
-     * Set this parameter to <code>null</code> if you prefer to ignore this value.
-     * 
-     * @param complexOptionsNetwork a {@link ComplexOptions} you want to use when processing the network request. 
-     * Set this parameter to <code>null</code> if you prefer to ignore this value.
-     * 
-     * @return Returns the request id generated by the DataLib.
-     * In case of treatment error, it returns {@link DataManager#BAD_REQUEST}.
-     * 
-     * @throws UnsupportedEncodingException
-     */
-	public synchronized int getMovie(final int policy, final OnDataListener datacacheListener, final int movie_id, final int options, ComplexOptions complexOptionsCache, ComplexOptions complexOptionsNetwork) throws UnsupportedEncodingException {
-
-//		final String oauth_consumer_key, final String oauth_nonce, final String oauth_signature_method, final int oauth_timestamp, final String oauth_signature, 
-		String oauth_consumer_key = NetflixConfig.CONSUMER_KEY;
-		String oauth_nonce = NetflixUtils.getNonce();
-		String oauth_signature_method = NetflixUtils.HMACSHA1_NAME_WEB;
-		String oauth_timestamp = ""+Calendar.getInstance().getTimeInMillis()/1000;
-		
-		//we prepare the parameters
-		final ParameterMap params = new ParameterMap();
-		params.put("oauth_consumer_key", oauth_consumer_key);
-		params.put("oauth_nonce", oauth_nonce);
-		params.put("oauth_signature_method", oauth_signature_method);
-		params.put("oauth_timestamp", String.valueOf(oauth_timestamp));
-		
-		//we prepare the request's url
-		final String __url = MessageFormat.format(NetflixServiceHelper.URL_MOVIE, movie_id+"");
-		
-		String oauth_signature = "";
-		try {
-			oauth_signature = NetflixUtils.getOAuthSignature("GET", __url, params);
-		} catch (InvalidKeyException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (NoSuchAlgorithmException e) {
-			e.printStackTrace();
-		}
-		
-		params.put("oauth_signature", oauth_signature);
+		final String __url = MessageFormat.format(NetflixServiceHelper.URL_MOVIE, type, movie_id+"");
 		
         int requestId = launchRequest(mServiceHelper, policy, datacacheListener, params, options, __url, NetflixService.WEBSERVICE_MOVIE, NetflixService.class, complexOptionsCache, complexOptionsNetwork);
 
@@ -2284,7 +2215,77 @@ public class NetflixDataManager extends DataManager {
 
 
 // Start of user code NetflixDataManager
-// You can add here your personal content
+
+
+
+    /**
+     * Retrieve the {@link Movie}
+     * 
+     * @param policy Give the policy context of the request using CACHE and/or NETWORK. Accepted values are : 
+     * {@link DataManager#TYPE_NETWORK}, {@link DataManager#TYPE_CACHE}, {@link DataManager#TYPE_CACHE_THEN_NETWORK}
+     * and {@link DataManager#TYPE_NETWORK_OTHERWISE_CACHE}
+     * 
+     * @param datacacheListener The listener who will receive the data from the cache.
+     * This parameter IS NEEDED in case of Datacache access (<code>TYPE_CACHE</code>, <code>TYPE_CACHE_THEN_NETWORK</code>
+     * and <code>TYPE_NETWORK_OTHERWISE_CACHE</code>). This listener won't be used to send DataLib's response.
+     * So, the addOnRequestFinishedListener call is still needed.
+     * 
+     * @param movie_id Movie's ID
+     * 
+     * @param options The options added to the request. The list of constants to use in this filed
+     * can be found in {@link DataLibRequest} (ex: {@link DataLibRequest#OPTION_CONSERVE_COOKIE_ENABLED} 
+     * or {@link DataLibRequest#OPTION_DATABASE_CACHE_DISABLED}, ...).
+     * The options can be aggregated thanks to the pipe character '|' (ex: <code>OPTION_CONSERVE_COOKIE_ENABLED |
+     * OPTION_DATABASE_CACHE_DISABLED</code>).
+     * 
+     * @param complexOptionsCache a {@link ComplexOptions} you want to use when processing the cache request. 
+     * Set this parameter to <code>null</code> if you prefer to ignore this value.
+     * 
+     * @param complexOptionsNetwork a {@link ComplexOptions} you want to use when processing the network request. 
+     * Set this parameter to <code>null</code> if you prefer to ignore this value.
+     * 
+     * @return Returns the request id generated by the DataLib.
+     * In case of treatment error, it returns {@link DataManager#BAD_REQUEST}.
+     * 
+     * @throws UnsupportedEncodingException
+     */
+	public synchronized int getMovie(final int policy, final OnDataListener datacacheListener, final String type, final int movie_id, final int options, ComplexOptions complexOptionsCache, ComplexOptions complexOptionsNetwork) throws UnsupportedEncodingException {
+
+		String oauth_consumer_key = NetflixConfig.CONSUMER_KEY;
+		String oauth_nonce = NetflixUtils.getNonce();
+		String oauth_signature_method = NetflixUtils.HMACSHA1_NAME_WEB;
+		String oauth_timestamp = ""+Calendar.getInstance().getTimeInMillis()/1000;
+
+		//we prepare the parameters
+		final ParameterMap params = new ParameterMap();
+		params.put("oauth_consumer_key", oauth_consumer_key);
+		params.put("oauth_nonce", oauth_nonce);
+		params.put("oauth_signature_method", oauth_signature_method);
+		params.put("oauth_timestamp", String.valueOf(oauth_timestamp));
+
+		//we prepare the request's url
+		final String __url = MessageFormat.format(NetflixServiceHelper.URL_MOVIE, type, movie_id+"");
+
+		String oauth_signature = "";
+		try {
+			oauth_signature = NetflixUtils.getOAuthSignature("GET", __url, params);
+		} catch (InvalidKeyException e) {
+			e.printStackTrace();
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
+
+		params.put("oauth_signature", oauth_signature);
+
+        int requestId = launchRequest(mServiceHelper, policy, datacacheListener, params, options, __url, NetflixService.WEBSERVICE_MOVIE, NetflixService.class, complexOptionsCache, complexOptionsNetwork);
+
+		//we add the listener subscription for this request
+		if(datacacheListener != null)
+			this.addOnDataListener(requestId, datacacheListener);
+
+		return requestId;
+    }
+
 // DO NOT MODIFY THE GENERATED COMMENTS "Start of user code" and "End of user code
 
 }
