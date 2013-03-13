@@ -3,14 +3,15 @@ package fr.eyal.datalib.sample.netflix.data.model.top100;
 
 import java.io.File;
 import java.lang.ref.SoftReference;
+import java.util.Calendar;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Movie;
 import android.os.Parcel;
+import android.os.Parcelable;
 import fr.eyal.datalib.sample.netflix.data.model.movieimage.MovieImage;
+import fr.eyal.datalib.sample.netflix.fragment.model.MovieItem;
 import fr.eyal.lib.util.FileManager;
-import fr.eyal.datalib.sample.netflix.fragment.MovieItem;
 
 public class ItemTop100 extends ItemTop100Base implements MovieItem {
 
@@ -35,10 +36,6 @@ public class ItemTop100 extends ItemTop100Base implements MovieItem {
     public ItemTop100() {
         super();
         
-    }
-
-    public ItemTop100(final Parcel in) {
-        super(in);
     }
 
     public ItemTop100(final long id) {
@@ -102,7 +99,10 @@ public class ItemTop100 extends ItemTop100Base implements MovieItem {
 
 	@Override
 	public String getLabel(int position) {
-		return (position+1) + ". " + title;
+		if(position > 0)
+			return (position+1) + ". " + title;
+		else 
+			return title;
 	}
     
 	@Override
@@ -114,5 +114,58 @@ public class ItemTop100 extends ItemTop100Base implements MovieItem {
 	public MovieImage getImage() {
 		return image;
 	}
+	
+	@Override
+	public String getId() {
+		
+		String[] elements = link.split("/");
+		
+		if(elements != null && elements.length > 0)
+			return elements[elements.length-1]; //we return the last element on the link
+		
+		return null;
+	}    
+	
+	
+	
+    /**
+     * PARCELABLE MANAGMENT
+     */
+
+	public static final Parcelable.Creator<ItemTop100> CREATOR = new Parcelable.Creator<ItemTop100>() {
+	    @Override
+	    public ItemTop100 createFromParcel(final Parcel in) {
+	        return new ItemTop100(in);
+	    }
+	
+	    @Override
+	    public ItemTop100[] newArray(final int size) {
+	        return new ItemTop100[size];
+	    }
+	};
+
+	@Override
+	public int describeContents() {
+	    return 0;
+	}
+
+	@Override
+	public void writeToParcel(final Parcel dest, final int flags) {
+		super.writeToParcel(dest, flags);
+
+		dest.writeParcelable(image, 0);
+		dest.writeString(imageUrl);
+		dest.writeString(imageName);		
+	}
+
+	public ItemTop100(final Parcel in) {
+		super(in);
+		
+		image = in.readParcelable(MovieImage.class.getClassLoader());
+		imageUrl = in.readString();
+		imageName = in.readString();
+		
+	}
+
 }
 // End of user code

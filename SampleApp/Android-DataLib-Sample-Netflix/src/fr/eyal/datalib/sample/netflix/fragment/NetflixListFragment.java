@@ -16,6 +16,9 @@ import android.widget.GridView;
 import fr.eyal.datalib.sample.netflix.R;
 import fr.eyal.datalib.sample.netflix.data.model.movieimage.MovieImage;
 import fr.eyal.datalib.sample.netflix.data.service.NetflixService;
+import fr.eyal.datalib.sample.netflix.fragment.adapter.NetflixListAdapter;
+import fr.eyal.datalib.sample.netflix.fragment.model.MovieItem;
+import fr.eyal.datalib.sample.netflix.fragment.model.MovieItemResponse;
 import fr.eyal.lib.data.model.ResponseBusinessObject;
 import fr.eyal.lib.data.service.model.BusinessResponse;
 import fr.eyal.lib.data.service.model.ComplexOptions;
@@ -262,7 +265,7 @@ public abstract class NetflixListFragment extends NetflixFragment implements OnS
 	 */
 	@SuppressWarnings("unchecked")
 	private void updateMovie(MovieItemResponse response) {
-		mAdapter.mArray = (ArrayList<MovieItem>) response.getItems();
+		mAdapter.setData((ArrayList<MovieItem>) response.getItems());
 		mAdapter.notifyDataSetChanged();
 	}
 

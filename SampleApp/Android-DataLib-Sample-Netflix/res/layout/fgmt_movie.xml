@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+    android:layout_height="match_parent"
+   	android:drawSelectorOnTop="true"
+    android:padding="8dp"
+	android:scrollbarStyle="outsideOverlay" >
+
+<LinearLayout 
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/item_margin_row"
+        android:background="@drawable/item_small_bg"
+        android:paddingBottom="12dp"
+        android:paddingLeft="1dp"
+        android:paddingRight="1dp"
+        android:paddingTop="1dp" >
+
+        <fr.eyal.datalib.sample.netflix.ui.LightTextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginBottom="4dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="4dp"
+            android:text="Hunger Games"
+            android:textColor="@color/netflix_red"
+            android:textSize="@dimen/item_font_size" />
+
+        <fr.eyal.datalib.sample.netflix.ui.LightTextView
+            android:id="@+id/category"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/title"
+            android:layout_marginBottom="4dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="4dp"
+            android:text="Action"
+            android:textColor="@color/netflix_grey" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/category"
+            android:layout_centerHorizontal="true"
+            android:background="@color/bg_grey"
+            android:padding="0dp" >
+
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:src="@drawable/movie_back"
+                android:textColor="@color/netflix_grey" />
+
+            <fr.eyal.datalib.sample.netflix.ui.LightTextView
+                android:id="@+id/year"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_margin="4dp"
+                android:layout_toRightOf="@+id/image"
+                android:gravity="right"
+                android:text="Large Text"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/netflix_grey" />
+
+            <fr.eyal.datalib.sample.netflix.ui.LightTextView
+                android:id="@+id/time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/year"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/year"
+                android:layout_margin="4dp"
+                android:gravity="right"
+                android:text="Medium Text"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/netflix_grey" />
+
+        </RelativeLayout>
+    </RelativeLayout>
+    
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/item_margin_row"
+        android:background="@drawable/item_small_bg"
+        android:paddingBottom="12dp"
+        android:paddingLeft="1dp"
+        android:paddingRight="1dp"
+        android:paddingTop="1dp" >
+        
+        <fr.eyal.datalib.sample.netflix.ui.LightTextView
+            android:id="@+id/synopsis"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginBottom="4dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="4dp"
+            android:text="Synopsis"
+            android:textColor="@color/netflix_red"
+            android:textSize="@dimen/item_font_size" />
+
+        <fr.eyal.datalib.sample.netflix.ui.LightTextView
+            android:id="@+id/synopsis_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/synopsis"
+            android:background="@color/bg_grey"
+            android:padding="4dp"
+            android:text="Action"
+            android:textColor="@color/netflix_grey" />
+        
+    </RelativeLayout>
+    
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/item_margin_row"
+        android:background="@drawable/item_small_bg"
+        android:paddingBottom="12dp"
+        android:paddingLeft="1dp"
+        android:paddingRight="1dp"
+        android:paddingTop="1dp" >
+        
+        <fr.eyal.datalib.sample.netflix.ui.LightTextView
+            android:id="@+id/cast"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginBottom="4dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="4dp"
+            android:text="Cast"
+            android:textColor="@color/netflix_red"
+            android:textSize="@dimen/item_font_size" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@id/cast" >
+
+            <fr.eyal.datalib.sample.netflix.ui.LightTextView
+                android:id="@+id/cast1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginBottom="4dp"
+                android:layout_weight="1"
+                android:background="@color/bg_grey"
+                android:padding="4dp"
+                android:text="Action"
+                android:textColor="@color/netflix_grey" />
+
+            <fr.eyal.datalib.sample.netflix.ui.LightTextView
+                android:id="@+id/cast2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginBottom="4dp"
+                android:layout_weight="1"
+                android:background="@color/bg_grey"
+                android:padding="4dp"
+                android:text="Action"
+                android:textColor="@color/netflix_grey" />
+
+        </LinearLayout>
+        
+    </RelativeLayout>
+
+<!--     <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/item_margin_row"
+            android:background="@drawable/item_list_bg"
+            android:paddingBottom="12dp"
+            android:paddingLeft="0dp"
+            android:paddingRight="0dp"
+            android:paddingTop="0dp" >
+        
+        <fr.eyal.datalib.sample.netflix.ui.LightTextView
+            android:id="@+id/cast"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginBottom="4dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="4dp"
+            android:text="Cast"
+            android:textColor="@color/netflix_red"
+            android:textSize="@dimen/item_font_size" />
+
+        <fr.eyal.datalib.sample.netflix.ui.LightTextView
+            android:id="@+id/cast_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/cast"
+            android:layout_marginBottom="4dp"
+            android:background="@color/bg_grey"
+            android:padding="4dp"
+            android:text="Action"
+            android:textColor="@color/netflix_grey" />
+        
+    </RelativeLayout>
+ -->    
+</LinearLayout>
+
+</ScrollView>

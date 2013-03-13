@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/item"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/item_height_small"
+    android:layout_marginBottom="4dp"
+    android:layout_marginLeft="2dp"
+    android:background="@drawable/item_small_bg"
+    android:paddingBottom="1dp"
+    android:paddingLeft="0dp"
+    android:paddingRight="0dp"
+    android:paddingTop="1dp" >
+
+    <ImageView
+        android:id="@+id/item_image"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:adjustViewBounds="true"
+        android:background="@color/padding_grey"
+        android:paddingLeft="0dp"
+        android:paddingRight="@dimen/image_border_small"
+        android:scaleType="centerCrop" />
+
+    <fr.eyal.datalib.sample.netflix.ui.LightTextView
+        android:id="@+id/item_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="@dimen/item_text_margin_vert"
+        android:layout_marginLeft="@dimen/item_text_margin_hor"
+        android:layout_marginRight="@dimen/item_text_margin_hor"
+        android:layout_marginBottom="@dimen/item_text_margin_vert"
+        android:layout_toRightOf="@+id/item_image"
+        android:gravity="right"
+        android:maxLines="3"
+        android:text="Hunger Game"
+        android:textColor="@color/netflix_red"
+        android:textSize="@dimen/item_font_size_small"
+        android:ellipsize="marquee"
+        />
+</RelativeLayout>

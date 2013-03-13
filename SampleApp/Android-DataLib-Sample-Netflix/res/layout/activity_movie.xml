@@ -1,0 +1,8 @@
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <fragment
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:name="fr.eyal.datalib.sample.netflix.fragment.MovieFragment"/>
+
+</merge>

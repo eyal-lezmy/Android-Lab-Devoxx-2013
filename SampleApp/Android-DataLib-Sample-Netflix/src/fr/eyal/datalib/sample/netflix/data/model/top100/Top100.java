@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 import android.os.Parcel;
-import fr.eyal.datalib.sample.netflix.fragment.MovieItemResponse;
+import fr.eyal.datalib.sample.netflix.fragment.model.MovieItemResponse;
 
 public class Top100 extends Top100Base implements MovieItemResponse{
 
