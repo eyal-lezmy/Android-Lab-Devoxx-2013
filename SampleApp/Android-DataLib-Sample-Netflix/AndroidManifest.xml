@@ -16,7 +16,19 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+                <meta-data android:name="android.app.default_searchable"
+                           android:value="fr.eyal.datalib.sample.netflix.SearchableActivity" />
         </activity>
+
+        <activity android:name="fr.eyal.datalib.sample.netflix.SearchableActivity"
+	              android:launchMode="singleTop">
+	        <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+            <meta-data android:name="android.app.searchable"
+                       android:resource="@xml/searchable"/>
+        </activity>
+
         <service android:name="fr.eyal.datalib.sample.netflix.data.service.NetflixService"></service>
         <provider android:name="fr.eyal.datalib.sample.netflix.data.model.NetflixProvider" android:authorities="fr.eyal.datalib.sample.netflix.datacache.provider" android:exported="false"></provider>
     </application>
