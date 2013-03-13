@@ -81,7 +81,7 @@ public class MovieItemHolder implements OnDataListener {
 			MovieImage img = (MovieImage) response;
 			item.image = img;
 			
-			Bitmap bitmap = img.image.get();
+			Bitmap bitmap = img.getBitmap();
 			if(bitmap != null){
 				CacheableBitmapDrawable cacheBmp = new CacheableBitmapDrawable(mContext.getResources(), item.getPosterName(), bitmap, CacheableBitmapDrawable.RecyclePolicy.DISABLED);
 				mBitmapCache.put(cacheBmp);

@@ -1,6 +1,7 @@
 // Start of user code fr.eyal.datalib.sample.netflix.data.model.movieimage.MovieImage. DO NOT MODIFY THE GENERATED COMMENTS
 package fr.eyal.datalib.sample.netflix.data.model.movieimage;
 
+import android.graphics.Bitmap;
 import android.os.Parcel;
 import android.os.Parcelable;
 import fr.eyal.lib.data.service.model.ComplexOptions;
@@ -46,8 +47,12 @@ public class MovieImage extends MovieImageBase {
 
 	public MovieImage(final Parcel in) {
 		super(in);
-	}    
+	}
 
-    
+    public Bitmap getBitmap() {
+        if (image != null)
+            return image.get();
+        return null;
+    }
 }
 // End of user code
