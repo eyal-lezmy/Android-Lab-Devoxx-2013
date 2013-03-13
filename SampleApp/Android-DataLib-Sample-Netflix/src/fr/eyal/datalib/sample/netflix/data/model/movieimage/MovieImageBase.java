@@ -124,11 +124,5 @@ public class MovieImageBase implements ResponseBusinessObject {
     	//we store the image path file for futur use
 		imagePath = mFileManager.getPathFromInternalCache(CACHE_DIRECTORY, fingerprint);
     }
-
-    public Bitmap getBitmap() {
-        if (image != null)
-            return image.get();
-        return null;
-    }
 }
 
