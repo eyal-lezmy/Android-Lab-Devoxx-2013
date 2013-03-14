@@ -35,8 +35,11 @@ public abstract class NetflixFragment extends Fragment implements OnDataListener
 		if(mRequestIds != null && mDataManager != null){
 			// we launch the request's data reception
 			synchronized (mRequestIds) {
-				for (final Integer requestId : mRequestIds) {
-					if(requestId != null) 
+				int size = mRequestIds.size();
+				for (int i = 0; i < size; i++) {
+					Integer requestId = mRequestIds.get(i);
+					Out.w("", "RESUME" + requestId + " " + mRequestIds);
+					if(requestId != null)
 						mDataManager.addOnDataListener(requestId, this);
 					else
 						Out.e("", "REQUEST ID NULL !!!!!!!!!!!!!");
@@ -51,7 +54,10 @@ public abstract class NetflixFragment extends Fragment implements OnDataListener
 		if(mRequestIds != null && mDataManager != null){
 			// we stop the request's data reception
 			synchronized (mRequestIds) {
-				for (final Integer requestId : mRequestIds) {
+				int size = mRequestIds.size();
+				for (int i = 0; i < size; i++) {
+					Integer requestId = mRequestIds.get(i);
+					Out.e("", "PAUSE " + requestId + " " + mRequestIds);
 					if(requestId != null)
 						mDataManager.removeOnDataListener(requestId, this);
 					else
