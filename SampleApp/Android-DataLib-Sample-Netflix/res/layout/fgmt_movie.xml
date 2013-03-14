@@ -31,7 +31,7 @@
             android:layout_marginRight="8dp"
             android:layout_marginTop="4dp"
             android:textColor="@color/netflix_red"
-            android:textSize="@dimen/item_font_size" />
+            android:textSize="30sp" />
 
         <fr.eyal.datalib.sample.netflix.ui.LightTextView
             android:id="@+id/category"
@@ -41,8 +41,9 @@
             android:layout_marginBottom="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
-            android:layout_marginTop="4dp"
-            android:textColor="@color/netflix_grey" />
+            android:layout_marginTop="0dp"
+            android:textColor="@color/netflix_grey"
+            android:textSize="20sp" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -61,7 +62,8 @@
                 android:src="@drawable/movie_back"
                 android:scaleType="centerCrop"
                 android:adjustViewBounds="true"
-                android:background="@color/netflix_red" />
+                 />
+<!-- android:background="@color/netflix_red"  -->
 
             <fr.eyal.datalib.sample.netflix.ui.LightTextView
                 android:id="@+id/year"
@@ -69,10 +71,10 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginBottom="8dp"
+                android:layout_marginBottom="4dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="12dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="4dp"
                 android:layout_toRightOf="@+id/image"
                 android:gravity="right"
                 android:textAppearance="?android:attr/textAppearanceLarge"
@@ -89,7 +91,7 @@
                 android:layout_marginBottom="8dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="12dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="0dp"
                 android:gravity="right"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="@color/netflix_grey"

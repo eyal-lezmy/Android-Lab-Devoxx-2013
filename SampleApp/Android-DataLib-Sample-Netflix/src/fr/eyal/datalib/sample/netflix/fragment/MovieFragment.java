@@ -4,6 +4,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.text.Html;
@@ -34,11 +35,14 @@ import fr.eyal.lib.data.service.DataManager;
 import fr.eyal.lib.data.service.ServiceHelper;
 import fr.eyal.lib.data.service.model.BusinessResponse;
 import fr.eyal.lib.data.service.model.DataLibRequest;
+import fr.eyal.lib.util.Out;
 
 public class MovieFragment extends NetflixFragment {
 
 	MovieItem mMovieItem;
 	Movie mMovie;
+	Synopsis mSynopsis;
+	Bitmap mBitmap;
 	
 	TextView mTxtTitle;
 	TextView mTxtCategory;
@@ -52,30 +56,19 @@ public class MovieFragment extends NetflixFragment {
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
+
 		Bundle extras = getActivity().getIntent().getExtras();
-		
 		mMovieItem = (MovieItem) extras.get(MovieActivity.EXTRA_MOVIE);
 		
+		
 		super.onCreate(savedInstanceState);
+		setRetainInstance(true);
 		
-		try {
+		if(mMovieItem.getLabel(-1).contains("Season"))
+			mDataType = "series";
+		else
+			mDataType = "movies";
 
-			if(mMovieItem.getLabel(-1).contains("Season"))
-				mDataType = "series";
-			else
-				mDataType = "movies";
-
-			int movieId = Integer.parseInt(mMovieItem.getId());
-			int id = mDataManager.getMovie(DataManager.TYPE_CACHE, this, mDataType, movieId, DataLibRequest.OPTION_NO_OPTION, null, null);
-			mRequestIds.add(id);
-
-			id = mDataManager.getSynopsis(DataManager.TYPE_CACHE, this, movieId, DataLibRequest.OPTION_NO_OPTION, null, null);
-			mRequestIds.add(id);
-
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		}
-		
 	}
 	
 	@Override
@@ -92,24 +85,66 @@ public class MovieFragment extends NetflixFragment {
 		mTxtYear = (TextView) scrollView.findViewById(R.id.year);
 		mImage = (ImageView) scrollView.findViewById(R.id.image);
 
-		mTxtTitle.setText(mMovieItem.getLabel(-1));
-		
-		Bitmap bmp = mMovieItem.getPoster(false);
-		
-		if(bmp != null) {
-			
-//			float width = getResources().getDimension(R.dimen.movie_image_width);
-//			float height = width * bmp.getHeight() / bmp.getWidth();
-//			Util.scaleBitmap(bmp, width, height, Util.ScalingLogic.FIT);
 
-			mImage.setImageDrawable(new BitmapDrawable(getResources(), bmp));
+		Bitmap bmp = null;
+		if(mBitmap != null) {
+			mImage.setImageDrawable(new BitmapDrawable(getResources(), mBitmap));
+			bmp = mBitmap;
+			
+		} else {
+			
+			if(mMovieItem != null) {
+				mTxtTitle.setText(mMovieItem.getLabel(-1));
+				bmp = mMovieItem.getPoster(false);			
+			}
+			
+			if(bmp != null) {
+				mBitmap = bmp;
+				
+//				float width = getResources().getDimension(R.dimen.movie_image_width);
+//				float height = width * bmp.getHeight() / bmp.getWidth();
+//				Util.scaleBitmap(bmp, width, height, Util.ScalingLogic.FIT);
+				
+				mImage.setImageDrawable(new BitmapDrawable(getResources(), bmp));
+			}
+			
 		}
 		
-		try {
-			int id = mDataManager.getMovieImage(DataManager.TYPE_CACHE, this, mMovieItem.getImageUrl(), DataLibRequest.OPTION_NO_OPTION, null, null);
-			mRequestIds.add(id);
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
+		if(bmp != null && bmp.getWidth() < mImage.getHeight()){
+			
+			try {
+				int id = mDataManager.getMovieImage(DataManager.TYPE_CACHE, this, mMovieItem.getImageUrl(), DataLibRequest.OPTION_NO_OPTION, null, null);
+				mRequestIds.add(id);
+				
+			} catch (NumberFormatException e) {
+				e.printStackTrace();
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		int movieId = Integer.parseInt(mMovieItem.getId());
+
+		if(mMovie != null){
+			updateBasics(mMovie);
+		} else {
+			try {
+				int id = mDataManager.getMovie(DataManager.TYPE_CACHE, this, mDataType, movieId, DataLibRequest.OPTION_NO_OPTION, null, null);
+				mRequestIds.add(id);
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}
+		}
+
+		if(mSynopsis != null) {
+			updateSynopsis(mSynopsis);
+		} else {
+			try {
+				int id = mDataManager.getSynopsis(DataManager.TYPE_CACHE, this, movieId, DataLibRequest.OPTION_NO_OPTION, null, null);
+				mRequestIds.add(id);
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}
 		}
 		
 		return scrollView;
@@ -117,6 +152,7 @@ public class MovieFragment extends NetflixFragment {
 
 	@Override
 	public void onCacheRequestFinished(int requestId, ResponseBusinessObject response) {
+		Out.w("", "REMOVE" + requestId + " " + mRequestIds);
 		mRequestIds.remove(Integer.valueOf(requestId));
 		
 		if(response instanceof MovieImage){
@@ -160,6 +196,24 @@ public class MovieFragment extends NetflixFragment {
 				}
 			}
 
+		} else if(response instanceof Synopsis) {
+			Synopsis synopsis = (Synopsis) response;
+			
+			if(!synopsis.isInvalidID()){
+				mSynopsis = synopsis;
+				mTxtSynopsis.post(new UpdateContent(mSynopsis));
+				
+			} else {
+				try {
+					int id = mDataManager.getSynopsis(DataManager.TYPE_NETWORK, this, Integer.parseInt(mMovieItem.getId()), DataLibRequest.OPTION_NO_OPTION, null, null);
+					mRequestIds.add(id);
+					
+				} catch (NumberFormatException e) {
+					e.printStackTrace();
+				} catch (UnsupportedEncodingException e) {
+					e.printStackTrace();
+				}
+			}
 		}
 		
 	}
@@ -172,6 +226,9 @@ public class MovieFragment extends NetflixFragment {
 
 	@Override
 	public void onRequestFinished(int requestId, boolean suceed, BusinessResponse response) {
+		Out.w("", "REMOVE" + requestId + " " + mRequestIds);
+		mRequestIds.remove(Integer.valueOf(requestId));
+		
 		if(!suceed){
 //			if(response.response instanceof ResponseBusinessObjectDAO){
 //				try {
@@ -253,40 +310,57 @@ public class MovieFragment extends NetflixFragment {
 		public void run() {
 			
 			if(mMovie != null) {
-				mTxtTitle.setText(mMovie.attrTitleRegular);
-				mTxtYear.setText(""+mMovie.release_year);
-				
-				int runtime = mMovie.runtime;
-				int hours = runtime/3600;
-				int minutes = (runtime%3600)/60;
-				int seconds = runtime%60;
-				
-				StringBuilder builder = new StringBuilder();
-				if(hours > 0){
-					builder.append(hours);
-					builder.append("h ");
-				}
-				if(hours > 0 || minutes > 0) {
-					builder.append(minutes);
-					builder.append("m ");
-				}
-				if(hours <= 0) {
-					builder.append(seconds);
-					builder.append("s");
-				}
-				mTxtTime.setText(builder.toString());
-				
-				ArrayList<MovieCategory> categories = mMovie.movieCategory;
-				if(categories.size() > 1)
-					mTxtCategory.setText(categories.get(1).attrLabel);
-				else
-					mTxtCategory.setText("");				
+				updateBasics(mMovie);				
 			}
 			
 			if(mSynopsis != null) {
-				mTxtSynopsis.setText(Html.fromHtml(mSynopsis.synopsis));
+				updateSynopsis(mSynopsis);
 			}
 		}
+	}
+	
+	private void updateSynopsis(Synopsis synopsis) {
+		if(synopsis != null && synopsis.synopsis != null)
+			mTxtSynopsis.setText(Html.fromHtml(synopsis.synopsis));
+	}
+	
+	private void updateBasics(Movie movie) {
+		mTxtTitle.setText(movie.attrTitleRegular);
+		mTxtYear.setText(""+movie.release_year);
+		
+		int runtime = movie.runtime;
+		int hours = runtime/3600;
+		int minutes = runtime/60; //(runtime%3600)/60;
+		int seconds = runtime%60;
+		
+		StringBuilder builder = new StringBuilder();
+//				if(hours > 0){
+//					builder.append(hours);
+//					builder.append("h ");
+//				}
+//				if(hours > 0 || minutes > 0) {
+//					builder.append(minutes);
+//					builder.append("m ");
+//				}
+//				if(hours <= 0) {
+//					builder.append(seconds);
+//					builder.append("s");
+//				}
+		if(minutes > 0) {
+			builder.append(minutes);
+			builder.append(" minutes");
+		} else {
+			builder.append(seconds);
+			builder.append(" seconds");
+		}
+		
+		mTxtTime.setText(builder.toString());
+		
+		ArrayList<MovieCategory> categories = movie.movieCategory;
+		if(categories.size() > 1)
+			mTxtCategory.setText(categories.get(1).attrLabel);
+		else
+			mTxtCategory.setText("");
 	}
 
 }
