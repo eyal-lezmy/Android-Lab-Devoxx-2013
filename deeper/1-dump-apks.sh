@@ -10,6 +10,6 @@ mkdir apk-dump
 # - List all apks (-f for the file absolute name)
 # - Grep the apk absolute name
 # - pull the apk in apk-dump
-adb shell pm list packages -f | \
+adb shell pm list packages -f -3 | \
 	egrep -o "/.[^=]*" | \
 	xargs -I pkg adb pull pkg apk-dump
