@@ -15,7 +15,7 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/Theme.Netflix" >
+        android:theme="@android:style/Theme.Holo.Light" >
         <activity
             android:name="fr.eyal.datalib.sample.netflix.NetflixActivity"
             android:label="@string/app_name" >
