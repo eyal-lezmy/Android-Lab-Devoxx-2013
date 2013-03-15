@@ -78,7 +78,8 @@ public class MovieImageBase implements ResponseBusinessObject {
 
 	@Override
 	public void writeToParcel(final Parcel dest, final int flags) {
-		dest.writeParcelable(image.get(), flags);
+		if(image != null)
+			dest.writeParcelable(image.get(), flags);
 	}
 
 	public MovieImageBase(final Parcel in) {

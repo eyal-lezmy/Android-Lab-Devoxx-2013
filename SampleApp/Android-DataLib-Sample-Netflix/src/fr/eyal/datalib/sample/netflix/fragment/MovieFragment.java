@@ -371,8 +371,16 @@ public class MovieFragment extends NetflixFragment {
 	}
 	
 	private void updateBasics(Movie movie) {
-		mTxtTitle.setText(movie.attrTitleRegular);
-		mTxtYear.setText(""+movie.release_year);
+		
+		if(movie == null)
+			return;
+		
+//		mTxtTitle.setText(movie.attrTitleRegular);
+		if(movie.release_year > 0) {
+			mTxtYear.setText(""+movie.release_year);			
+		} else {
+			mTxtYear.setVisibility(View.GONE);
+		}
 		
 		int runtime = movie.runtime;
 		int hours = runtime/3600;
@@ -402,11 +410,15 @@ public class MovieFragment extends NetflixFragment {
 		
 		mTxtTime.setText(builder.toString());
 		
-		ArrayList<MovieCategory> categories = movie.movieCategory;
-		if(categories.size() > 1)
-			mTxtCategory.setText(categories.get(1).attrLabel);
-		else
-			mTxtCategory.setText("");
+		if(movie.movieCategory != null) {
+			ArrayList<MovieCategory> categories = movie.movieCategory;
+			if(categories.size() > 1)
+				mTxtCategory.setText(categories.get(1).attrLabel);
+			else
+				mTxtCategory.setText("");
+		} else {
+			
+		}
 	}
 	
     public void executeDalvikFiltering(View v) {
