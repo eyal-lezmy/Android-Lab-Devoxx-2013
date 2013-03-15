@@ -4,10 +4,10 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,32 +16,45 @@ import android.view.animation.Animation;
 import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import fr.eyal.datalib.sample.cache.CacheableBitmapDrawable;
+import android.widget.Toast;
 import fr.eyal.datalib.sample.netflix.MovieActivity;
-import fr.eyal.datalib.sample.netflix.NetflixConfig;
 import fr.eyal.datalib.sample.netflix.R;
 import fr.eyal.datalib.sample.netflix.data.model.movie.Movie;
 import fr.eyal.datalib.sample.netflix.data.model.movie.MovieCategory;
 import fr.eyal.datalib.sample.netflix.data.model.movieimage.MovieImage;
 import fr.eyal.datalib.sample.netflix.data.model.synopsis.Synopsis;
-import fr.eyal.datalib.sample.netflix.data.service.NetflixDataManager;
 import fr.eyal.datalib.sample.netflix.data.service.NetflixService;
 import fr.eyal.datalib.sample.netflix.fragment.model.MovieItem;
-import fr.eyal.datalib.sample.netflix.util.Util;
-import fr.eyal.lib.data.model.BusinessObjectDAO;
+import fr.eyal.datalib.sample.netflix.rs.DalvikFilter;
+import fr.eyal.datalib.sample.netflix.rs.RenderScriptFilter;
 import fr.eyal.lib.data.model.ResponseBusinessObject;
-import fr.eyal.lib.data.model.ResponseBusinessObjectDAO;
 import fr.eyal.lib.data.service.DataManager;
-import fr.eyal.lib.data.service.ServiceHelper;
 import fr.eyal.lib.data.service.model.BusinessResponse;
 import fr.eyal.lib.data.service.model.DataLibRequest;
 import fr.eyal.lib.util.Out;
 
 public class MovieFragment extends NetflixFragment {
 
+	
+    private float[] sepiaMatrix = {
+            0.3588f, 0.2990f, 0.2392f,
+            0.7044f, 0.5870f, 0.4696f,
+            0.1368f, 0.1140f, 0.0912f
+    };
+
+    private Bitmap mInBitmap;
+    private Bitmap mOutBitmap;
+
+    private DalvikFilter dalvikFilter;
+    private RenderScriptFilter renderFilter;
+
+    private ImageView outImageView;
+	
 	MovieItem mMovieItem;
 	Movie mMovie;
 	Synopsis mSynopsis;
+	
+	Bitmap mOriginalBitmap;
 	Bitmap mBitmap;
 	
 	TextView mTxtTitle;
@@ -53,6 +66,8 @@ public class MovieFragment extends NetflixFragment {
 	TextView mTxtCast2;
 	ImageView mImage;
 	String mDataType;
+	
+	
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -68,6 +83,13 @@ public class MovieFragment extends NetflixFragment {
 			mDataType = "series";
 		else
 			mDataType = "movies";
+		
+		
+        dalvikFilter = new DalvikFilter();
+        dalvikFilter.setMatrix(sepiaMatrix);
+
+        renderFilter = new RenderScriptFilter(getActivity()	);
+        renderFilter.setMatrix(sepiaMatrix);
 
 	}
 	
@@ -84,6 +106,26 @@ public class MovieFragment extends NetflixFragment {
 		mTxtTitle = (TextView) scrollView.findViewById(R.id.title);
 		mTxtYear = (TextView) scrollView.findViewById(R.id.year);
 		mImage = (ImageView) scrollView.findViewById(R.id.image);
+		
+		
+		mImage.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Log.d("mImage.onClickListener", "executeDalvikFiltering");
+				executeDalvikFiltering(v);
+			}
+		});
+		
+		mImage.setOnLongClickListener(new View.OnLongClickListener() {
+			
+			@Override
+			public boolean onLongClick(View v) {
+				Log.d("mImage.onLongClickListener", "executeRenderScriptFiltering");
+				executeRenderScriptFiltering(v);
+				return false;
+			}
+		});
 
 
 		Bitmap bmp = null;
@@ -101,11 +143,15 @@ public class MovieFragment extends NetflixFragment {
 			if(bmp != null) {
 				mBitmap = bmp;
 				
+				// Init RS variables
+				mInBitmap = bmp;
+		        mOutBitmap = bmp.copy(bmp.getConfig(), true);
+				
 //				float width = getResources().getDimension(R.dimen.movie_image_width);
 //				float height = width * bmp.getHeight() / bmp.getWidth();
 //				Util.scaleBitmap(bmp, width, height, Util.ScalingLogic.FIT);
 				
-				mImage.setImageDrawable(new BitmapDrawable(getResources(), bmp));
+				mImage.setImageDrawable(new BitmapDrawable(getResources(), mOutBitmap));
 			}
 			
 		}
@@ -362,5 +408,30 @@ public class MovieFragment extends NetflixFragment {
 		else
 			mTxtCategory.setText("");
 	}
+	
+    public void executeDalvikFiltering(View v) {
+        computeDalvikFiltering(mInBitmap, mOutBitmap);
+        mImage.invalidate();
+    }
+	
+    public void executeRenderScriptFiltering(View v) {
+        computeRenderScriptFiltering(mInBitmap, mOutBitmap);
+        mImage.invalidate();
+    }
 
+    private void computeDalvikFiltering(Bitmap inputBitmap, Bitmap outputBitmap) {
+        long t = System.currentTimeMillis();
+        dalvikFilter.applyFilter(inputBitmap, outputBitmap);
+        Toast.makeText(getActivity(),
+                "Dalvik running time: " + (System.currentTimeMillis() - t) + " ms",
+                Toast.LENGTH_SHORT).show();
+    }
+
+    private void computeRenderScriptFiltering(Bitmap inputBitmap, Bitmap outputBitmap) {
+        long t = System.currentTimeMillis();
+        renderFilter.applyFilter(inputBitmap, outputBitmap);
+        Toast.makeText(getActivity(),
+                "Renderscript running time: " + (System.currentTimeMillis() - t) + " ms",
+                Toast.LENGTH_SHORT).show();
+    }
 }
