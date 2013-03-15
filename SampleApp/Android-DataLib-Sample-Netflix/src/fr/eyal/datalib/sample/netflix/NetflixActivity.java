@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.Menu;
 import android.widget.Button;
 import android.widget.SearchView;
@@ -53,6 +54,9 @@ public class NetflixActivity extends FragmentActivity {
 		mTitlePageIndicator = (TitlePageIndicator) findViewById(R.id.indicator);
 		mTitlePageIndicator.setViewPager(mViewPager);
 		
+		// Test for Backup Manager
+		Log.d("NetflixActivity", "UUID : " + Settings.getUuid(this));
+
 //		mBtnGetCast = (Button) findViewById(R.id.getCast);
 //		mBtnGetDirectors = (Button) findViewById(R.id.getDirectors);
 //		mBtnGetFilmography = (Button) findViewById(R.id.getFilmography);
